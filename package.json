@@ -1,0 +1,94 @@
+{
+  "name": "cucumber-forge-desktop",
+  "productName": "cucumber-forge-desktop",
+  "version": "0.1.1",
+  "description": "Cucumber Forge Desktop Application",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "npx electron-forge start",
+    "package": "npx electron-forge package",
+    "make": "npx electron-forge make",
+    "publish": "npx electron-forge publish",
+    "lint": "npx eslint src --color",
+    "test": "./node_modules/.bin/cucumber-js features/*.feature",
+    "preversion": "npm run lint && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cerner/cucumber-forge-desktop.git"
+  },
+  "keywords": [
+    "Cucumber",
+    "Electron",
+    "Report",
+    "Static"
+  ],
+  "author": "Cerner Corporation",
+  "license": "Apache-2.0",
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "./src/resources/win/logo.ico",
+        "executableName": "cucumber-forge"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "title": "Cucumber Forge",
+            "name": "cucumber_forge_desktop",
+            "exe": "cucumber-forge.exe",
+            "setupIcon": "./src/resources/win/logo.ico",
+            "loadingGif": "./src/resources/loading.gif",
+            "iconUrl": "https://raw.githubusercontent.com/cerner/cucumber-forge-desktop/master/src/resources/win/logo.ico"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  },
+  "updater": {
+    "url": "https://raw.githubusercontent.com/cerner/cucumber-forge-desktop/master/updates.json"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "bootswatch": "^4.1.3",
+    "cucumber-forge-report-generator": "^0.1.1",
+    "electron-simple-updater": "^1.5.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "font-awesome": "^4.7.0",
+    "underscore": "^1.9.1",
+    "underscore.string": "^3.3.5"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.34",
+    "@electron-forge/maker-deb": "^6.0.0-beta.34",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.34",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.34",
+    "@electron-forge/maker-zip": "^6.0.0-beta.34",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "cucumber": "^5.0.1",
+    "electron": "3.1.8",
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "moment": "^2.22.2",
+    "spectron": "^5.0.0"
+  }
+}

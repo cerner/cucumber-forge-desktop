@@ -1,0 +1,8 @@
+{
+  "win32-x64-prod": {
+    "readme": "Fix issue where tables in background steps are not included in report",
+    "update": "https://github.com/cerner/cucumber-forge-desktop/releases/download/v0.1.1",
+    "install": "https://github.com/cerner/cucumber-forge-desktop/releases/download/v0.1.1/cucumber-forge-desktop-0.1.1.Setup.exe",
+    "version": "0.1.1"
+  }
+}
