@@ -8,6 +8,7 @@
 
 [![Cerner OSS](https://badgen.net/badge/Cerner/OSS/blue)](http://engineering.cerner.com/2014/01/cerner-and-open-source/)
 [![License](https://badgen.net/badge/license/Apache-2.0/blue)](https://github.com/cerner/cucumber-forge-desktop/blob/master/LICENSE)
+[![Build Status](https://travis-ci.com/cerner/cucumber-forge-desktop.svg?branch=master)](https://travis-ci.com/cerner/cucumber-forge-desktop)
 
 # _About_
 Cucumber Forge Desktop allows users to create clean HTML reports without having to build the project or run the tests. Many of the stakeholders involved in the Cucumber documentation process do not need the test pass/fail information for the scenarios. Instead they just want simple reports that are easy to generate, read, and share.
