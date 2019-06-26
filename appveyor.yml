@@ -1,0 +1,22 @@
+build: off
+
+os: unstable
+
+platform:
+  - x86
+  - x64
+
+environment:
+  nodejs_version: "10"
+
+cache:
+  - node_modules -> package.json
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm ci
+
+test_script:
+  - node --version
+  - npm --version
+  - npm test
