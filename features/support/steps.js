@@ -25,7 +25,7 @@ const createDirectory = (directoryName) => {
 };
 
 /* eslint-disable func-names */
-Before({ timeout: 60 * 1000 }, function () {
+Before({ timeout: 100 * 1000 }, function () {
   this.app = new spectron.Application({
     path: electronPath,
     args: [path.join(__dirname, '../../src/index.js')],
@@ -105,7 +105,7 @@ Then(/^the report (?:will contain|contains) (\d+) scenarios?$/, function (scenar
   }));
 });
 
-After(function () {
+After({ timeout: 100 * 1000 }, function () {
   // Clean up any files that got written.
   this.reportFiles.forEach(filePath => fs.unlinkSync(filePath));
   this.featureFiles.forEach(filePath => fs.unlinkSync(filePath));

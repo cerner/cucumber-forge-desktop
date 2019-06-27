@@ -52,6 +52,7 @@ const createWindow = () => {
     icon: `${__dirname}/resources/png/CucumberForge_48.png`,
     webPreferences: {
       enableBlinkFeatures: 'OverlayScrollbars',
+      nodeIntegration: true,
     },
   });
 
