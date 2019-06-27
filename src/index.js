@@ -1,4 +1,6 @@
-const { app, BrowserWindow, dialog, shell } = require('electron');
+const {
+  app, BrowserWindow, dialog, shell,
+} = require('electron');
 const updater = require('electron-simple-updater');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -60,8 +62,8 @@ const createWindow = () => {
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 
   mainWindow.setMenu(null);
-  
-  mainWindow.webContents.on('new-window', function(e, url) {
+
+  mainWindow.webContents.on('new-window', (e, url) => {
     e.preventDefault();
     shell.openExternal(url);
   });
