@@ -5,6 +5,7 @@ const fs = require('fs');
 const moment = require('moment');
 const path = require('path');
 const spectron = require('spectron');
+const Timeout = require('await-timeout');
 
 const {
   Given, When, Then, After, Before,
@@ -24,13 +25,32 @@ const createDirectory = (directoryName) => {
   return dirPath;
 };
 
+async function startApp(world) {
+  let timeout = 7400;
+  let tryCount = 1;
+  while (tryCount <= 4) {
+    // eslint-disable-next-line no-param-reassign
+    world.app = new spectron.Application({
+      path: electronPath,
+      args: [path.join(__dirname, '../../src/index.js')],
+      chromeDriverArgs: ['no-sandbox'],
+      startTimeout: 118 * 1000,
+      waitTimeout: 10 * 1000,
+    });
+    // eslint-disable-next-line no-await-in-loop
+    await Timeout.wrap(world.app.start(), timeout);
+    if (world.app.isRunning()) {
+      return;
+    }
+    timeout *= 2;
+    tryCount += 1;
+  }
+  throw new Error('Could not start app after 4 tries.');
+}
+
 /* eslint-disable func-names */
-Before({ timeout: 100 * 1000 }, function () {
-  this.app = new spectron.Application({
-    path: electronPath,
-    args: [path.join(__dirname, '../../src/index.js')],
-  });
-  return this.app.start();
+Before({ timeout: 119 * 1000 }, function () {
+  return startApp(this);
 });
 
 Before(function () {
@@ -105,7 +125,7 @@ Then(/^the report (?:will contain|contains) (\d+) scenarios?$/, function (scenar
   }));
 });
 
-After({ timeout: 100 * 1000 }, function () {
+After({ timeout: 119 * 1000 }, function () {
   // Clean up any files that got written.
   this.reportFiles.forEach(filePath => fs.unlinkSync(filePath));
   this.featureFiles.forEach(filePath => fs.unlinkSync(filePath));

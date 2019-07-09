@@ -10,7 +10,7 @@
     "make": "npx electron-forge make",
     "publish": "npx electron-forge publish",
     "lint": "npx eslint src --color",
-    "test": "./node_modules/.bin/cucumber-js features/*.feature",
+    "test": "./node_modules/.bin/cucumber-js features/*.feature --exit",
     "preversion": "npm run lint && npm test"
   },
   "repository": {
@@ -79,6 +79,7 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.39",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.39",
     "@electron-forge/maker-zip": "^6.0.0-beta.39",
+    "await-timeout": "^0.6.0",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "cucumber": "^5.0.1",
