@@ -2,11 +2,16 @@ const {
   app, BrowserWindow, dialog, shell,
 } = require('electron');
 const updater = require('electron-simple-updater');
+const log = require('electron-log');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
 }
+
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is garbage collected.
+let mainWindow;
 
 const checkForUpdates = () => {
   // Avoid checking for updates on first run.
@@ -14,36 +19,38 @@ const checkForUpdates = () => {
     return;
   }
 
-  updater.on('update-downloaded', (meta) => {
+  updater.on('update-available', (meta) => {
     const dialogOpts = {
       type: 'info',
-      buttons: ['Restart', 'Later'],
+      buttons: ['Update', 'Later'],
       title: 'Cucumber Forge Update',
       message: meta.version,
-      detail: 'A new version of Cucumber Forge has been downloaded. Restart the application to apply the updates.',
+      detail: 'A new version of Cucumber Forge is available.',
     };
     dialog.showMessageBox(dialogOpts, (response) => {
-      if (response === 0) updater.quitAndInstall();
+      if (response === 0) {
+        // Currently only support auto-updates on Windows
+        if (process.platform === 'win32') {
+          updater.downloadUpdate();
+        } else {
+          shell.openExternal('https://github.com/cerner/cucumber-forge-desktop/releases');
+        }
+      }
     });
   });
+  updater.on('update-downloading', (meta) => { // eslint-disable-line no-unused-vars
+    mainWindow.webContents.executeJavaScript(`
+      toggleLoadingInd();
+    `);
+  });
+  updater.on('update-downloaded', (meta) => { // eslint-disable-line no-unused-vars
+    updater.quitAndInstall();
+  });
   updater.on('error', (err) => {
-    const dialogOpts = {
-      type: 'info',
-      buttons: ['Retry', 'Cancel'],
-      title: 'Update Error',
-      message: 'There was a problem updating Cucumber Forge',
-      detail: err.message,
-    };
-    dialog.showMessageBox(dialogOpts, (response) => {
-      if (response === 0) updater.checkForUpdates();
-    });
+    log.error(`There was a problem automatically updating Cucumber Forge [${err.message}]`);
   });
   updater.init();
 };
-
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-let mainWindow;
 
 const createWindow = () => {
   // Create the browser window.

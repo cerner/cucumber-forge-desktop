@@ -28,7 +28,7 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "icon": "./src/resources/win/logo.ico",
+        "icon": "./src/resources/icons/logo",
         "executableName": "cucumber-forge"
       },
       "makers": [
@@ -38,9 +38,9 @@
             "title": "Cucumber Forge",
             "name": "cucumber_forge_desktop",
             "exe": "cucumber-forge.exe",
-            "setupIcon": "./src/resources/win/logo.ico",
+            "setupIcon": "./src/resources/icons/logo.ico",
             "loadingGif": "./src/resources/loading.gif",
-            "iconUrl": "https://raw.githubusercontent.com/cerner/cucumber-forge-desktop/master/src/resources/win/logo.ico"
+            "iconUrl": "https://raw.githubusercontent.com/cerner/cucumber-forge-desktop/master/src/resources/icons/logo.ico"
           }
         },
         {
@@ -61,12 +61,14 @@
     }
   },
   "updater": {
-    "url": "https://raw.githubusercontent.com/cerner/cucumber-forge-desktop/master/updates.json"
+    "url": "https://raw.githubusercontent.com/cerner/cucumber-forge-desktop/master/updates.json",
+    "autoDownload": false
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
     "bootswatch": "^4.1.3",
     "cucumber-forge-report-generator": "^0.1.1",
+    "electron-log": "^3.0.6",
     "electron-simple-updater": "^1.5.0",
     "electron-squirrel-startup": "^1.0.0",
     "font-awesome": "^4.7.0",
