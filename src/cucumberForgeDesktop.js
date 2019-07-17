@@ -56,9 +56,7 @@ const createReport = () => {
     reportHTML = result;
     // Display the loading indicator for at least 0.5 sec
     const timeout = 500 - (Date.now() - startTime);
-    setTimeout(() => {
-      toggleLoadingInd();
-    }, timeout);
+    setTimeout(toggleLoadingInd, timeout);
     const outputElement = document.getElementById('output');
     outputElement.innerHTML = reportHTML;
     outputElement.style.display = 'block';
