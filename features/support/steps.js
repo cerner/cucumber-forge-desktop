@@ -1,3 +1,4 @@
+/* globals Atomics SharedArrayBuffer */
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const electronPath = require('electron');
@@ -98,6 +99,8 @@ When('the user clicks the save button', function () {
 });
 
 Then(/the report (?:will be|is) displayed/, { timeout: 60 * 1000 }, function () {
+  // Wait for a second for the loading ind to disappear
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 1000);
   return this.app.client.waitUntilWindowLoaded().getText('#output')
     .should.eventually.not.equal('');
 });

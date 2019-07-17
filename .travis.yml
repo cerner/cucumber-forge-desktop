@@ -1,14 +1,45 @@
 language: node_js
-os:
-  - windows
-  - osx
-  - linux
 node_js:
   - "lts/*"
 notifications:
   email: false
 
-before_script:
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then export DISPLAY=:99.0          ; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sh -e /etc/init.d/xvfb start  ; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sleep 3                       ; fi
+# Default phases (can be overridden in jobs)
+install: npm ci
+script:
+  - npm run lint
+  - npm test
+
+stages:
+  - name: test
+    if: tag IS NOT present # TODO REMOVE
+  - name: deploy
+    if: tag IS present
+
+jobs:
+  include:
+    - name: "Test on Linux"
+      stage: test
+      os: linux
+      before_script:
+        - export DISPLAY=:99.0
+        - sh -e /etc/init.d/xvfb start
+        - sleep 3
+    - name: "Test on OSX"
+      stage: test
+      os: osx
+    - name: "Test on Windows"
+      stage: test
+      os: windows
+    - name: "Deploy from Linux"
+      stage: deploy
+      os: linux
+      script: npm run publish
+    - name: "Deploy from OSX"
+      stage: deploy
+      os: osx
+      script: npm run publish
+    - name: "Deploy from Windows"
+      stage: deploy
+      os: windows
+      script: npm run publish

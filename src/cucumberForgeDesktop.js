@@ -32,16 +32,35 @@ const getFeatureFiles = (directoryName) => {
   return featureFiles;
 };
 
+const toggleLoadingInd = () => {
+  const loadingElem = document.getElementById('loadingInd');
+  const outputElement = document.getElementById('output');
+  if (loadingElem.style.display === 'block') {
+    loadingElem.style.display = 'none';
+    outputElement.style.display = 'block';
+    document.getElementById('appBody').classList.remove('empty');
+  } else {
+    loadingElem.style.display = 'block';
+    outputElement.style.display = 'none';
+    document.getElementById('appBody').classList.add('empty');
+  }
+};
+
 const createReport = () => {
+  const startTime = Date.now();
+  toggleLoadingInd();
+
   tag = document.getElementById('tagBox').value;
   const featureFiles = getFeatureFiles(selectedFolderPath);
   generator.generate(featureFiles, projectName, tag).then((result) => {
     reportHTML = result;
+    // Display the loading indicator for at least 0.5 sec
+    const timeout = 500 - (Date.now() - startTime);
+    setTimeout(toggleLoadingInd, timeout);
     const outputElement = document.getElementById('output');
     outputElement.innerHTML = reportHTML;
     outputElement.style.display = 'block';
     init(); // eslint-disable-line no-undef
-    document.getElementById('appBody').classList.remove('empty');
   });
 };
 

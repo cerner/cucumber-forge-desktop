@@ -17,6 +17,12 @@
       body.empty {
         background-color: rgb(50,50,50);
       }
+      #loadingInd {
+        margin-top: calc(30vh);
+        margin-left: auto;
+        margin-right: auto;
+        display: none;
+      }
       /* Couple of style tweaks for the report to deal with offset from the navbar */
       a.anchor {
         top: calc(-72.38px - 1.5em) !important;
@@ -55,5 +61,6 @@
       </form>
     </nav>
     <div id="output"></div>
+    <img id="loadingInd" src="./resources/loading.gif" alt="Loading">
   </body>
 </html>
