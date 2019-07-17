@@ -66,8 +66,7 @@ Feature: Generate Report
   Scenario: Generating an HTML report for the features in a directory and its sub-directories
     Given the current date is {current_date}
     When the user selects the 'pets' directory with the folder selection button
-    Then the loading indicator will be displayed
-    And a second later the report will be displayed
+    Then the report will be displayed
     And the title on the report will be "pets"
     And the report will contain 2 features
     And the report will contain 4 scenarios
@@ -77,8 +76,7 @@ Feature: Generate Report
 
     When the user enters the value <tag:> into the filter text box
     And the user selects the 'pets' directory with the folder selection button
-    Then the loading indicator will be displayed
-    And a second later the report will be displayed
+    Then the report will be displayed
     And the report will contain 2 features
     And the report will contain 2 scenarios
 
@@ -93,8 +91,7 @@ Feature: Generate Report
     And the report contains 2 scenarios
     When the user enters the value 'feeding' into the filter text box
     And the user <action:>
-    Then the loading indicator will be displayed
-    And the report will contain 1 scenario
+    Then the report will contain 1 scenario
 
     Examples:
       | action:                  |
