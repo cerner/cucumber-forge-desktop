@@ -44,24 +44,35 @@
           }
         },
         {
+          "name": "@electron-forge/maker-dmg",
+          "config": {
+            "name": "Cucumber Forge",
+            "icon": "./src/resources/icons/logo.icns"
+          }
+        },
+        {
           "name": "@electron-forge/maker-zip",
           "platforms": [
-            "darwin"
+            "linux"
           ]
-        },
+        }
+      ],
+      "publishers": [
         {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "jkuester",
+              "name": "cucumber-forge-desktop"
+            },
+            "draft": true
+          }
         }
       ]
     }
   },
   "updater": {
-    "url": "https://raw.githubusercontent.com/cerner/cucumber-forge-desktop/master/updates.json",
+    "url": "https://raw.githubusercontent.com/jkuester/cucumber-forge-desktop/publish_from_travis/updates.json",
     "autoDownload": false
   },
   "dependencies": {
@@ -77,10 +88,10 @@
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.39",
-    "@electron-forge/maker-deb": "^6.0.0-beta.39",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.39",
+    "@electron-forge/maker-dmg": "^6.0.0-beta.39",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.39",
     "@electron-forge/maker-zip": "^6.0.0-beta.39",
+    "@electron-forge/publisher-github": "^6.0.0-beta.39",
     "await-timeout": "^0.6.0",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
