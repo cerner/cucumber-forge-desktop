@@ -1,6 +1,16 @@
 const fs = require('fs');
 const path = require('path');
 
+const renameExecutable = (makeResult) => {
+  const artifactNameBase = `cucumber-forge-desktop-${makeResult.platform}-${makeResult.arch}-${makeResult.packageJSON.version}-Setup`;
+  const append = makeResult.platform === 'win32' ? '.exe' : '.dmg';
+  const currFile = makeResult.artifacts.filter(artifact => artifact.endsWith(append))[0];
+  const newFile = `${path.parse(currFile).dir}/${artifactNameBase}${append}`;
+  // eslint-disable-next-line no-param-reassign
+  makeResult.artifacts[makeResult.artifacts.indexOf(currFile)] = newFile;
+  return fs.renameSync(currFile, newFile);
+};
+
 module.exports = {
   packagerConfig: {
     icon: './src/resources/icons/logo',
@@ -47,16 +57,8 @@ module.exports = {
   hooks: {
     postMake: async (forgeConfig, makeResults) => {
       // Rename the windows and OSX executables for consistency
-      await makeResults.filter(result => result.platform === 'win32' || result.platform === 'darwin')
-        .forEach((makeResult) => {
-          const artifactNameBase = `cucumber-forge-desktop-${makeResult.platform}-${makeResult.arch}-${makeResult.packageJSON.version}-Setup`;
-          const append = makeResult.platform === 'win32' ? '.exe' : '.dmg';
-          const currFile = makeResult.artifacts.filter(artifact => artifact.endsWith(append))[0];
-          const newFile = `${path.parse(currFile).dir}/${artifactNameBase}${append}`;
-          // eslint-disable-next-line no-param-reassign
-          makeResult.artifacts[makeResult.artifacts.indexOf(currFile)] = newFile;
-          return fs.renameSync(currFile, newFile);
-        });
+      await makeResults.filter(result => ['win32', 'darwin'].includes(result.platform))
+        .forEach(renameExecutable);
       return makeResults;
     },
   },
