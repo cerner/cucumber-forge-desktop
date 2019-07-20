@@ -12,8 +12,7 @@ script:
 
 stages:
   - name: test
-    if: tag IS NOT present # TODO REMOVE
-  - name: deploy
+  - name: publish
     if: tag IS present
 
 jobs:
@@ -31,15 +30,15 @@ jobs:
     - name: "Test on Windows"
       stage: test
       os: windows
-    - name: "Deploy from Linux"
-      stage: deploy
+    - name: "Publish from Linux"
+      stage: publish
       os: linux
       script: npm run publish
-    - name: "Deploy from OSX"
-      stage: deploy
+    - name: "Publish from OSX"
+      stage: publish
       os: osx
       script: npm run publish
-    - name: "Deploy from Windows"
-      stage: deploy
+    - name: "Publish from Windows"
+      stage: publish
       os: windows
       script: npm run publish

@@ -26,53 +26,10 @@
   "author": "Cerner Corporation",
   "license": "Apache-2.0",
   "config": {
-    "forge": {
-      "packagerConfig": {
-        "icon": "./src/resources/icons/logo",
-        "executableName": "cucumber-forge"
-      },
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "title": "Cucumber Forge",
-            "name": "cucumber_forge_desktop",
-            "exe": "cucumber-forge.exe",
-            "setupIcon": "./src/resources/icons/logo.ico",
-            "loadingGif": "./src/resources/loading.gif",
-            "iconUrl": "https://raw.githubusercontent.com/cerner/cucumber-forge-desktop/master/src/resources/icons/logo.ico"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-dmg",
-          "config": {
-            "name": "Cucumber Forge",
-            "icon": "./src/resources/icons/logo.icns"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "linux"
-          ]
-        }
-      ],
-      "publishers": [
-        {
-          "name": "@electron-forge/publisher-github",
-          "config": {
-            "repository": {
-              "owner": "jkuester",
-              "name": "cucumber-forge-desktop"
-            },
-            "draft": true
-          }
-        }
-      ]
-    }
+    "forge": "./forge.config.js"
   },
   "updater": {
-    "url": "https://raw.githubusercontent.com/jkuester/cucumber-forge-desktop/publish_from_travis/updates.json",
+    "url": "https://raw.githubusercontent.com/cerner/cucumber-forge-desktop/master/updates.json",
     "autoDownload": false
   },
   "dependencies": {
