@@ -3,7 +3,6 @@ const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const electronPath = require('electron');
 const fs = require('fs');
-const moment = require('moment');
 const path = require('path');
 const spectron = require('spectron');
 const Timeout = require('await-timeout');
@@ -49,7 +48,6 @@ async function startApp(world) {
   throw new Error('Could not start app after 4 tries.');
 }
 
-/* eslint-disable func-names */
 Before({ timeout: 119 * 1000 }, function () {
   return startApp(this);
 });
@@ -65,10 +63,6 @@ Given('there is a file named {string} with the following contents:', function (f
   const filePath = path.resolve(__dirname, fileName);
   this.featureFiles.push(filePath);
   fs.writeFileSync(filePath, contents, FILE_ENCODING);
-});
-
-Given(/^the current date is \{current_date\}$/, function () {
-  this.currentDate = moment().format('LL');
 });
 
 When('the user selects the {string} directory with the folder selection button', function (directoryName) {
@@ -110,9 +104,15 @@ Then('the report will be saved in a file called {string}', function (fileName) {
   this.reportFiles.push(fileName);
 });
 
-Then('the title on the report will be {string}', function (reportTitle) {
-  return this.app.client.getText('#headerTitle').then((reportText) => {
+Then(/^the report name on the sidebar (?:is|will be) '(.+)'$/, function (reportTitle) {
+  return this.app.client.getText('#sidenavTitle').then((reportText) => {
     expect(reportText).to.eql(reportTitle);
+  });
+});
+
+Then(/^the project title on the sidebar (?:is|will be) '(\w+)'$/, function (projectTitle) {
+  return this.app.client.getText('#headerTitle').then((reportText) => {
+    expect(reportText).to.eql(projectTitle);
   });
 });
 
