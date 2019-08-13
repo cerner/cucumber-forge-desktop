@@ -4,19 +4,18 @@ node_js:
 notifications:
   email: false
 
-# Default phases (can be overridden in jobs)
-install: npm ci
-script:
-  - npm run lint
-  - npm test
-
 stages:
+  - name: lint
   - name: test
   - name: publish
     if: tag IS present
 
 jobs:
   include:
+    - name: "Check Linting"
+      stage: lint
+      os: linux
+      script: npm run lint
     - name: "Test on Linux"
       stage: test
       os: linux
@@ -24,12 +23,15 @@ jobs:
         - xvfb
       before_script:
         - export DISPLAY=:99.0
+      script: npm test
     - name: "Test on OSX"
       stage: test
       os: osx
+      script: npm test
     - name: "Test on Windows"
       stage: test
       os: windows
+      script: npm test
     - name: "Publish from Linux"
       stage: publish
       os: linux
