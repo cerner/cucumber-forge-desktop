@@ -33,7 +33,7 @@ This project is built on [Travis](https://travis-ci.com/cerner/cucumber-frge-des
 
 # _Building_
 
-Note that Cucumber Forge Desktop is an Electon-based front-end for the [cucumber-forge-report-generator](https://github.com/cerner/cucumber-forge-report-generator) NPM library.
+Note that Cucumber Forge Desktop is an Electron-based front-end for the [cucumber-forge-report-generator](https://github.com/cerner/cucumber-forge-report-generator) NPM library.
 
 Development Environment:
 * [NPM](https://www.npmjs.com/) - ^6.4.1
