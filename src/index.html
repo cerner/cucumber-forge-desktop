@@ -3,10 +3,16 @@
   <head>
     <meta charset="utf-8">
     <title>Cucumber Forge</title>
+    <!-- hack to work around bug in bootstrap -->
+    <script>
+      window.$ = window.jQuery = require('jquery');
+      window.Bootstrap = require('bootstrap');
+    </script>
     <script type="text/javascript" src="cucumberForgeDesktop.js"></script>
     <script type="text/javascript" src="../node_modules/cucumber-forge-report-generator/src/templates/scripts.js"></script>
     <link href="../node_modules/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../node_modules/bootswatch/dist/flatly/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="index.css" rel="stylesheet">
     <style>
       @import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Mono|Roboto+Slab');
       body {
@@ -59,6 +65,19 @@
           <button id="saveButton" type="button" onclick="saveOutput()" class="btn btn-info btn-sm"><i class="fa fa-lg fa-save text-white"></i></button>
         </div>
       </form>
+
+      <!-- SETTINGS MENU -->
+      <div class="dropdown dropleft">
+        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                id="settingsMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+          Settings
+        </button>
+        <div class="dropdown-menu" ario-labelledby="settingsMenuButton">
+          <a class="dropdown-item" href="#" onClick="toggleReviewMode()">Review Mode</a>
+        </div>
+      </div>
+
     </nav>
     <div id="output"></div>
     <img id="loadingInd" src="./resources/loading.gif" alt="Loading">
