@@ -105,6 +105,7 @@ const submitTagFiltersFromTextBox = (event) => {
  * strikethroughs when toggling off. Adds checkboxes and event listeners to
  * toggle strikethroughs on scenario titles when toggling on.
  */
+/* eslint-disable no-param-reassign */
 const toggleReviewMode = () => {
   const checkmarks = Array.from(document.getElementsByClassName('review-check'));
   if (checkmarks.length > 0) {
@@ -133,3 +134,4 @@ const toggleReviewMode = () => {
       });
   }
 };
+/* eslint-enable no-param-reassign */
