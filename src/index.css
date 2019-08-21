@@ -1,3 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Mono|Roboto+Slab');
+body {
+    margin-top: 72.38px !important;
+    background-color: #fcfcfc;
+    font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif !important;
+}
+body.empty {
+    background-color: rgb(50,50,50);
+}
+#loadingInd {
+    margin-top: calc(30vh);
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+}
+/* Couple of style tweaks for the report to deal with offset from the navbar */
+a.anchor {
+    top: calc(-72.38px - 1.5em) !important;
+}
+.sidenav {
+    height: calc(100% - 72.38px) !important;
+}
 [class*="scenario-button"] {
   font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif;
   background-color: #e2e2e2;

@@ -13,30 +13,6 @@
     <link href="../node_modules/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="../node_modules/bootswatch/dist/flatly/bootstrap.min.css" rel="stylesheet">
     <link type="text/css" href="index.css" rel="stylesheet">
-    <style>
-      @import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Mono|Roboto+Slab');
-      body {
-        margin-top: 72.38px !important;
-        background-color: #fcfcfc;
-        font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif !important;
-      }
-      body.empty {
-        background-color: rgb(50,50,50);
-      }
-      #loadingInd {
-        margin-top: calc(30vh);
-        margin-left: auto;
-        margin-right: auto;
-        display: none;
-      }
-      /* Couple of style tweaks for the report to deal with offset from the navbar */
-      a.anchor {
-        top: calc(-72.38px - 1.5em) !important;
-      }
-      .sidenav {
-        height: calc(100% - 72.38px) !important;
-      }
-    </style>
   </head>
 
   <body id="appBody" class="empty">
@@ -71,7 +47,7 @@
         <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
                 id="settingsMenuButton" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-          Settings
+          <i class="fa fa-cog" aria-hidden="true"></i>
         </button>
         <div class="dropdown-menu" ario-labelledby="settingsMenuButton">
           <a class="dropdown-item" href="#" onClick="toggleReviewMode()">Review Mode</a>
