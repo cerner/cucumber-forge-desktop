@@ -99,3 +99,39 @@ const submitTagFiltersFromTextBox = (event) => {
   }
   return true;
 };
+
+/*
+ * Toggles the review mode on and off. Removes any added checks and
+ * strikethroughs when toggling off. Adds checkboxes and event listeners to
+ * toggle strikethroughs on scenario titles when toggling on.
+ */
+/* eslint-disable no-param-reassign */
+const toggleReviewMode = () => {
+  const checkmarks = Array.from(document.getElementsByClassName('review-check'));
+  if (checkmarks.length > 0) {
+    Array.from(document.getElementsByClassName('scenario-button-review'))
+      .forEach((scenarioButton) => {
+        scenarioButton.className = 'scenario-button';
+        scenarioButton.style.textDecoration = 'none';
+      });
+    checkmarks.forEach((check) => { check.remove(); });
+  } else {
+    Array.from(document.getElementsByClassName('scenario-button'))
+      .forEach((scenarioButton) => {
+        scenarioButton.className = 'scenario-button-review';
+        const btn = document.createElement('input');
+        btn.setAttribute('type', 'checkbox');
+        btn.setAttribute('class', 'review-check');
+        btn.addEventListener('click', () => {
+          if (!scenarioButton.style.textDecoration
+                       || scenarioButton.style.textDecoration === 'none') {
+            scenarioButton.style.textDecoration = 'line-through';
+          } else {
+            scenarioButton.style.textDecoration = 'none';
+          }
+        });
+        scenarioButton.insertAdjacentElement('beforebegin', btn);
+      });
+  }
+};
+/* eslint-enable no-param-reassign */

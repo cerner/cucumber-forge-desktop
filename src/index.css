@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Mono|Roboto+Slab');
+body {
+    margin-top: 72.38px !important;
+    background-color: #fcfcfc;
+    font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif !important;
+}
+body.empty {
+    background-color: rgb(50,50,50);
+}
+#loadingInd {
+    margin-top: calc(30vh);
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+}
+/* Couple of style tweaks for the report to deal with offset from the navbar */
+a.anchor {
+    top: calc(-72.38px - 1.5em) !important;
+}
+.sidenav {
+    height: calc(100% - 72.38px) !important;
+}
+[class*="scenario-button"] {
+  font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif;
+  background-color: #e2e2e2;
+  color: #404040;
+  cursor: pointer;
+  padding: 0.5em 0 0.5em 0.5em;
+  text-align: left;
+  outline: none;
+  white-space: nowrap;
+  border-top: none;
+  border-left: none;
+  border-bottom: none;
+  border-right: solid 1px #c9c9c9;
+}
+.scenario-button {
+  width: 100%;
+}
+.scenario-button-review {
+  width: 95.5%;
+}
+.review-check {
+  padding: 0 0 0 0;
+  margin: 0;
+  z-index: 10000000000000;
+  display: inline-block;
+  width: 4.5%;
+}
+.panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #e2e2e2;
+}
