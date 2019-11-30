@@ -40,8 +40,6 @@
     "electron-simple-updater": "^1.5.0",
     "electron-squirrel-startup": "^1.0.0",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.4.1",
-    "popper.js": "^1.15.0",
     "underscore": "^1.9.1",
     "underscore.string": "^3.3.5"
   },
@@ -56,7 +54,6 @@
     "chai-as-promised": "^7.1.1",
     "cucumber": "^5.1.0",
     "electron": "6.0.1",
-    "electron-prebuilt-compile": "4.0.0",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-plugin-import": "^2.18.2",
