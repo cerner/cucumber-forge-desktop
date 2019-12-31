@@ -14,9 +14,10 @@ let projectName;
 let reportHTML;
 let tag;
 
+const isDirectory = (source) => fs.lstatSync(source).isDirectory();
+
 const getFeatureFiles = (directoryName) => {
   // Recurse on directories:
-  const isDirectory = (source) => fs.lstatSync(source).isDirectory();
   const getDirectories = (source) => fs
     .readdirSync(source)
     .map((name) => path.join(source, name))
@@ -87,7 +88,7 @@ const saveOutput = () => {
 };
 
 const setNewFolderPath = (folderPath) => {
-  selectedFolderPath = folderPath;
+  selectedFolderPath = isDirectory(folderPath) ? folderPath : path.dirname(folderPath);
   projectName = path.parse(selectedFolderPath).base;
   createReport();
 };
