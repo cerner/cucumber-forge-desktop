@@ -9,6 +9,8 @@ stages:
   - name: test
   - name: publish
     if: tag IS present
+  - name: docs
+    if: tag IS present
 
 jobs:
   include:
@@ -44,3 +46,7 @@ jobs:
       stage: publish
       os: windows
       script: npm run publish
+    - name: "Regenerate Documentation"
+      stage: docs
+      os: linux
+      script: sh ./.travis/deployDocs.sh
