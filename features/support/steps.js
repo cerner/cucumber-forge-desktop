@@ -123,16 +123,16 @@ Then(/^the report will contain (\d+) features?$/, function (featureCount) {
 });
 
 Then(/^the report (?:will contain|contains) (\d+) scenarios?$/, function (scenarioCount) {
-  return this.app.client.$$('.feature-wrapper').then(features => this.app.client.$$('.scenario-divider').then((scenarios) => {
+  return this.app.client.$$('.feature-wrapper').then((features) => this.app.client.$$('.scenario-divider').then((scenarios) => {
     expect(scenarios.length).to.eql(scenarioCount - features.length);
   }));
 });
 
 After({ timeout: 119 * 1000 }, function () {
   // Clean up any files that got written.
-  this.reportFiles.forEach(filePath => fs.unlinkSync(filePath));
-  this.featureFiles.forEach(filePath => fs.unlinkSync(filePath));
-  this.addedDirectories.forEach(dirPath => fs.rmdirSync(dirPath));
+  this.reportFiles.forEach((filePath) => fs.unlinkSync(filePath));
+  this.featureFiles.forEach((filePath) => fs.unlinkSync(filePath));
+  this.addedDirectories.forEach((dirPath) => fs.rmdirSync(dirPath));
 
   if (this.app && this.app.isRunning()) {
     return this.app.stop();

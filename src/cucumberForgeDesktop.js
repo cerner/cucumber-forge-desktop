@@ -14,21 +14,22 @@ let projectName;
 let reportHTML;
 let tag;
 
+const isDirectory = (source) => fs.lstatSync(source).isDirectory();
+
 const getFeatureFiles = (directoryName) => {
   // Recurse on directories:
-  const isDirectory = source => fs.lstatSync(source).isDirectory();
-  const getDirectories = source => fs
+  const getDirectories = (source) => fs
     .readdirSync(source)
-    .map(name => path.join(source, name))
+    .map((name) => path.join(source, name))
     .filter(isDirectory);
   const subDirectories = getDirectories(directoryName);
   const featureFiles = [];
-  subDirectories.forEach(subDirectory => featureFiles.push(...getFeatureFiles(subDirectory)));
+  subDirectories.forEach((subDirectory) => featureFiles.push(...getFeatureFiles(subDirectory)));
 
   // Add feature files from this directory.
   const allFiles = fs.readdirSync(directoryName);
-  const localFeatureFiles = underscore.filter(allFiles, item => underscorestring.endsWith(item, '.feature'));
-  localFeatureFiles.forEach(featureFileName => featureFiles.push(`${directoryName}/${featureFileName}`));
+  const localFeatureFiles = underscore.filter(allFiles, (item) => underscorestring.endsWith(item, '.feature'));
+  localFeatureFiles.forEach((featureFileName) => featureFiles.push(`${directoryName}/${featureFileName}`));
   return featureFiles;
 };
 
@@ -87,7 +88,7 @@ const saveOutput = () => {
 };
 
 const setNewFolderPath = (folderPath) => {
-  selectedFolderPath = folderPath;
+  selectedFolderPath = isDirectory(folderPath) ? folderPath : path.dirname(folderPath);
   projectName = path.parse(selectedFolderPath).base;
   createReport();
 };
