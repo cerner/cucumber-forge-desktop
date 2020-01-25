@@ -93,7 +93,8 @@ Feature: Generate Report
     And the report name on the sidebar is 'All Scenarios'
     When the user enters the value 'feeding' into the filter text box
     And the user <action:>
-    Then the report will contain 1 scenario
+    Then the report will be displayed
+    And the report will contain 1 scenario
     And the report name on the sidebar will be 'feeding'
 
     Examples:
