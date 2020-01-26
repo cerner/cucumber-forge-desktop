@@ -1,5 +1,5 @@
 #!/bin/sh
-git checkout ${TRAVIS_BRANCH}
+git checkout master
 
 echo Regenerating documentation:
 
