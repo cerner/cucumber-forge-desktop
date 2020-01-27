@@ -84,7 +84,7 @@ const saveOutput = () => {
   remote.dialog.showSaveDialog({
     title: 'Save Report',
     defaultPath: defPath,
-  }, writeReportHTMLToFile);
+  }).then((result) => writeReportHTMLToFile(result.filePath));
 };
 
 const setNewFolderPath = (folderPath) => {
