@@ -3,8 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const Generator = require('cucumber-forge-report-generator');
 const { remote } = require('electron');
-const underscore = require('underscore');
-const underscorestring = require('underscore.string');
 
 const fileEncoding = 'utf-8';
 const generator = new Generator();
@@ -15,23 +13,6 @@ let reportHTML;
 let tag;
 
 const isDirectory = (source) => fs.lstatSync(source).isDirectory();
-
-const getFeatureFiles = (directoryName) => {
-  // Recurse on directories:
-  const getDirectories = (source) => fs
-    .readdirSync(source)
-    .map((name) => path.join(source, name))
-    .filter(isDirectory);
-  const subDirectories = getDirectories(directoryName);
-  const featureFiles = [];
-  subDirectories.forEach((subDirectory) => featureFiles.push(...getFeatureFiles(subDirectory)));
-
-  // Add feature files from this directory.
-  const allFiles = fs.readdirSync(directoryName);
-  const localFeatureFiles = underscore.filter(allFiles, (item) => underscorestring.endsWith(item, '.feature'));
-  localFeatureFiles.forEach((featureFileName) => featureFiles.push(`${directoryName}/${featureFileName}`));
-  return featureFiles;
-};
 
 const toggleLoadingInd = () => {
   const loadingElem = document.getElementById('loadingInd');
@@ -52,17 +33,14 @@ const createReport = () => {
   toggleLoadingInd();
 
   tag = document.getElementById('tagBox').value;
-  const featureFiles = getFeatureFiles(selectedFolderPath);
-  generator.generate(featureFiles, projectName, tag).then((result) => {
-    reportHTML = result;
-    // Display the loading indicator for at least 0.5 sec
-    const timeout = 500 - (Date.now() - startTime);
-    setTimeout(toggleLoadingInd, timeout);
-    const outputElement = document.getElementById('output');
-    outputElement.innerHTML = reportHTML;
-    outputElement.style.display = 'block';
-    init(); // eslint-disable-line no-undef
-  });
+  reportHTML = generator.generate(selectedFolderPath, projectName, tag);
+  // Display the loading indicator for at least 0.5 sec
+  const timeout = 500 - (Date.now() - startTime);
+  setTimeout(toggleLoadingInd, timeout);
+  const outputElement = document.getElementById('output');
+  outputElement.innerHTML = reportHTML;
+  outputElement.style.display = 'block';
+  init(); // eslint-disable-line no-undef
 };
 
 const getDefaultOutputFileName = () => {
@@ -74,7 +52,9 @@ const getDefaultOutputFileName = () => {
 };
 
 const writeReportHTMLToFile = (fileName) => {
-  if (fileName === undefined) return;
+  if (fileName === undefined) {
+    return;
+  }
   fs.writeFileSync(fileName, reportHTML, fileEncoding);
 };
 
