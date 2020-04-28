@@ -35,7 +35,7 @@
   "dependencies": {
     "bootstrap": "^4.4.1",
     "bootswatch": "^4.4.1",
-    "cucumber-forge-report-generator": "^1.0.0",
+    "cucumber-forge-report-generator": "^1.0.1",
     "electron-log": "^4.1.1",
     "electron-simple-updater": "^2.0.8",
     "electron-squirrel-startup": "^1.0.0",

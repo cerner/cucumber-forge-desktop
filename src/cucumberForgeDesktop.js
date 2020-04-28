@@ -20,7 +20,9 @@ const toggleLoadingInd = () => {
   if (loadingElem.style.display === 'block') {
     loadingElem.style.display = 'none';
     outputElement.style.display = 'block';
-    document.getElementById('appBody').classList.remove('empty');
+    if (reportHTML) {
+      document.getElementById('appBody').classList.remove('empty');
+    }
   } else {
     loadingElem.style.display = 'block';
     outputElement.style.display = 'none';
@@ -33,13 +35,16 @@ const createReport = () => {
   toggleLoadingInd();
 
   tag = document.getElementById('tagBox').value;
-  reportHTML = generator.generate(selectedFolderPath, projectName, tag);
+  try {
+    reportHTML = generator.generate(selectedFolderPath, projectName, tag);
+  } catch (error) {
+    reportHTML = '';
+    remote.dialog.showErrorBox('Error Generating Report', error.message);
+  }
   // Display the loading indicator for at least 0.5 sec
   const timeout = 500 - (Date.now() - startTime);
   setTimeout(toggleLoadingInd, timeout);
-  const outputElement = document.getElementById('output');
-  outputElement.innerHTML = reportHTML;
-  outputElement.style.display = 'block';
+  document.getElementById('output').innerHTML = reportHTML;
   init(); // eslint-disable-line no-undef
 };
 
