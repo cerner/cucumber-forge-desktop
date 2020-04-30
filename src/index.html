@@ -17,11 +17,17 @@
       body.empty {
         background-color: rgb(50,50,50);
       }
-      #loadingInd {
-        margin-top: calc(30vh);
-        margin-left: auto;
-        margin-right: auto;
+      #mask {
         display: none;
+        position:fixed;
+        cursor: wait !important;
+        margin-top: 0px !important;
+        height: 100vh;
+        width: 100vw;
+        top:0;
+        background-color: rgb(50,50,50);
+        opacity: 0.6;
+        z-index:9999;
       }
       /* Couple of style tweaks for the report to deal with offset from the navbar */
       a.anchor {
@@ -35,6 +41,7 @@
   </head>
 
   <body id="appBody" class="empty">
+    <div id="mask"></div>
     <nav class="navbar navbar-dark bg-primary fixed-top">
       <a class="navbar-brand" href="#">
         <img src="./resources/png/CucumberForge_48.png" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -43,25 +50,21 @@
       <form class="form-inline">
         <!-- FILTERING BOX -->
         <div class="input-group input-group-sm bg-primary">
-          <input id="tagBox" type="text" class="form-control form-control-sm" aria-label="Tags" href="#" onkeypress="return submitTagFiltersFromTextBox(event)">
+          <input id="tagBox" type="text" class="form-control form-control-sm" aria-label="Tags" href="#" onkeypress="submitTagFiltersFromTextBox(event); return false">
           <div class="input-group-append">
-            <button id="tagButton" class="btn btn-info" type="button" href="#" onclick="createReport()"><i class="fa fa-lg fa-filter text-white"></i></button>
+            <button id="tagButton" class="btn btn-info" type="button" href="#" onclick="clickFilterButton()"><i class="fa fa-lg fa-filter text-white"></i></button>
           </div>
         </div>
         <!-- SELECT DIRECTORY -->
         <div class="input-group input-group-sm bg-primary ml-2">
-          <label class="btn btn-info ">
-            <i class="fa fa-folder-open"></i>
-            <input type="file" style="display: none;" onchange="setNewFolderPath(folderSelection.files[0].path)" id="folderSelection" webkitdirectory directory multiple />
-          </label>
+          <button id="folderSelection" type="button" onclick="clickFolderSelectionButton()" class="btn btn-info btn-sm"><i class="fa fa-lg fa-folder-open text-white"></i></button>
         </div>
         <!-- SAVE BUTTON -->
         <div class="input-group input-group-sm bg-primary ml-2">
-          <button id="saveButton" type="button" onclick="saveOutput()" class="btn btn-info btn-sm"><i class="fa fa-lg fa-save text-white"></i></button>
+          <button id="saveButton" type="button" onclick="clickSaveButton()" class="btn btn-info btn-sm"><i class="fa fa-lg fa-save text-white"></i></button>
         </div>
       </form>
     </nav>
     <div id="output"></div>
-    <img id="loadingInd" src="./resources/loading.gif" alt="Loading">
   </body>
 </html>

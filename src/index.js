@@ -1,8 +1,9 @@
 const {
-  app, BrowserWindow, dialog, shell,
+  app, BrowserWindow, dialog, shell, ipcMain,
 } = require('electron');
 const updater = require('electron-simple-updater');
 const log = require('electron-log');
+const Generator = require('cucumber-forge-report-generator');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -64,7 +65,6 @@ const createWindow = () => {
       nodeIntegration: true,
     },
   });
-
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 
@@ -107,4 +107,16 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+const generator = new Generator();
+
+ipcMain.on('create-report-request', (event, request) => {
+  let report = '';
+  try {
+    report = generator.generate(request.folderPath, request.projectName, request.tag);
+  } catch (error) {
+    dialog.showErrorBox('Error Generating Report', error.message);
+  }
+  event.reply('create-report-reply', report);
 });
