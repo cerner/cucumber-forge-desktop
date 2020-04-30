@@ -10,8 +10,6 @@ let projectName;
 let reportHTML;
 let tag;
 
-// const isDirectory = (source) => fs.lstatSync(source).isDirectory();
-
 const toggleLoadingInd = () => {
   if (reportHTML) {
     document.getElementById('appBody').classList.remove('empty');
@@ -45,6 +43,12 @@ const createReport = () => {
   ipcRenderer.send('create-report-request', request);
 };
 
+const createReportForFolder = (folderPath) => {
+  selectedFolderPath = folderPath;
+  projectName = path.parse(folderPath).base;
+  createReport();
+};
+
 const getDefaultOutputFileName = () => {
   let reportName = `${projectName}.html`;
   if (tag) {
@@ -75,10 +79,7 @@ const clickFolderSelectionButton = async () => {
   });
   const [filePath] = selectedPaths.filePaths;
   if (filePath) {
-    selectedFolderPath = filePath;
-    projectName = path.parse(selectedFolderPath).base;
-
-    createReport();
+    createReportForFolder(filePath);
   }
 };
 
@@ -89,5 +90,6 @@ const clickFilterButton = () => {
 const submitTagFiltersFromTextBox = (event) => {
   if (event.keyCode === 13) {
     createReport();
+    event.preventDefault();
   }
 };

@@ -74,7 +74,6 @@ const createWindow = () => {
     e.preventDefault();
     shell.openExternal(url);
   });
-
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
     // Dereference the window object, usually you would store windows
@@ -82,6 +81,9 @@ const createWindow = () => {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  // Uncomment this to open the Chrome DevTools
+  // mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished

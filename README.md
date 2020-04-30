@@ -47,7 +47,7 @@ Linting is available and can be run via `npm run lint`.
 
 To execute the automated tests, simply run `npm test` from the project directory.
 
-To open the DevTools when the application loads (for debugging purposes) add the following code to the createWindow() function of the index.js file: `mainWindow.webContents.openDevTools();`
+To open the DevTools when the application loads (for debugging purposes) add the following code to the createWindow() function of the main.js file: `mainWindow.webContents.openDevTools();`
 
 # _Conventions_
 
