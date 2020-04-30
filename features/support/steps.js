@@ -32,7 +32,7 @@ async function startApp(world) {
     world.app = new spectron.Application({
       path: electronPath,
       args: [path.join(__dirname, '../../src/main.js')],
-      chromeDriverArgs: ['no-sandbox'],
+      chromeDriverArgs: ['no-sandbox', 'disable-dev-shm-usage'],
       startTimeout: 118 * 1000,
       waitTimeout: 10 * 1000,
     });
