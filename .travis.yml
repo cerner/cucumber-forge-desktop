@@ -30,10 +30,12 @@ jobs:
       stage: test
       os: osx
       script: npm test
-    - name: "Test on Windows"
-      stage: test
-      os: windows
-      script: npm test
+    # Enable when Spectron tests are fixed on Travis Windows Jobs:
+    # https://travis-ci.community/t/spectron-integration-test-failing-on-travis/6762
+    # - name: "Test on Windows"
+    #   stage: test
+    #   os: windows
+    #   script: npm test
     - name: "Publish from Linux"
       stage: publish
       os: linux
