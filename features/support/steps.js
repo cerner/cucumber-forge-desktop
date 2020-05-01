@@ -74,17 +74,6 @@ When('the user selects the {string} directory with the folder selection button',
 
 When('the user enters the value {string} into the filter text box', function (tag) {
   return this.app.client.addValue('#tagBox', tag);
-
-  // return this.app.client.waitUntilWindowLoaded().$('#tagBox').setValue(tag);
-
-  // this.app.client.execute((tagValue) => {
-  //   // eslint-disable-next-line no-undef
-  //   document.getElementById('tagBox').value = tagValue;
-  // }, tag);
-
-  // return this.app.client.getText('#tagBox').then((reportText) => {
-  //   expect(reportText).to.eql(tag);
-  // });
 });
 
 When('the user clicks the filter button', function () {
