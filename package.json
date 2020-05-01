@@ -39,12 +39,10 @@
     "electron-log": "^4.1.1",
     "electron-simple-updater": "^2.0.9",
     "electron-squirrel-startup": "^1.0.0",
-    "font-awesome": "^4.7.0",
-    "nan": "^2.14.1"
+    "font-awesome": "^4.7.0"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.51",
-    "@electron-forge/maker-dmg": "^6.0.0-beta.51",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.51",
     "@electron-forge/maker-zip": "^6.0.0-beta.51",
     "@electron-forge/publisher-github": "^6.0.0-beta.51",
