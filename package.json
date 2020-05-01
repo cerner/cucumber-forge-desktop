@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.51",
+    "@electron-forge/maker-dmg": "^6.0.0-beta.51",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.51",
     "@electron-forge/maker-zip": "^6.0.0-beta.51",
     "@electron-forge/publisher-github": "^6.0.0-beta.51",
@@ -50,13 +51,13 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "cucumber": "^6.0.5",
-    "electron": "^7.0.0",
+    "electron": "8.2.5",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "node-abi": "^2.16.0",
-    "spectron": "^9.0.0"
+    "spectron": "^10.0.1"
   }
 }

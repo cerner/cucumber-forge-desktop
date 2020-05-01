@@ -32,9 +32,7 @@ async function startApp(world) {
     world.app = new spectron.Application({
       path: electronPath,
       args: [path.join(__dirname, '../../src/main.js')],
-      // If you want to see the Cucumber Forge window while running the tests, remove 'headless'
-      chromeDriverArgs: ['no-sandbox', 'disable-dev-shm-usage', 'headless'],
-      // chromeDriverArgs: ['no-sandbox'],
+      chromeDriverArgs: ['no-sandbox'],
       startTimeout: 118 * 1000,
       waitTimeout: 10 * 1000,
     });
