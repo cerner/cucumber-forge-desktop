@@ -33,7 +33,8 @@ async function startApp(world) {
       path: electronPath,
       args: [path.join(__dirname, '../../src/main.js')],
       // If you want to see the Cucumber Forge window while running the tests, remove 'headless'
-      chromeDriverArgs: ['no-sandbox', 'disable-dev-shm-usage', 'headless', 'remote-debugging-port=9222'],
+      // chromeDriverArgs: ['no-sandbox', 'disable-dev-shm-usage', 'headless'],
+      chromeDriverArgs: ['--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage'],
       startTimeout: 118 * 1000,
       waitTimeout: 10 * 1000,
     });
