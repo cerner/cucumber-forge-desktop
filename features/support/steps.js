@@ -1,4 +1,3 @@
-/* globals Atomics SharedArrayBuffer */
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const electronPath = require('electron');
@@ -32,7 +31,7 @@ async function startApp(world) {
     // eslint-disable-next-line no-param-reassign
     world.app = new spectron.Application({
       path: electronPath,
-      args: [path.join(__dirname, '../../src/index.js')],
+      args: [path.join(__dirname, '../../src/main.js')],
       chromeDriverArgs: ['no-sandbox'],
       startTimeout: 118 * 1000,
       waitTimeout: 10 * 1000,
@@ -69,12 +68,12 @@ When('the user selects the {string} directory with the folder selection button',
   const dirPath = path.resolve(__dirname, directoryName);
   return this.app.client.execute((newPath) => {
     // eslint-disable-next-line no-undef
-    setNewFolderPath(newPath);
+    createReportForFolder(newPath);
   }, dirPath);
 });
 
 When('the user enters the value {string} into the filter text box', function (tag) {
-  return this.app.client.setValue('#tagBox', tag);
+  return this.app.client.addValue('#tagBox', tag);
 });
 
 When('the user clicks the filter button', function () {
@@ -94,7 +93,6 @@ When('the user clicks the save button', function () {
 
 Then(/the report (?:will be|is) displayed/, { timeout: 60 * 1000 }, function () {
   // Wait for a second for the loading ind to disappear
-  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 1000);
   return this.app.client.waitUntilWindowLoaded().getText('#output')
     .should.eventually.not.equal('');
 });
