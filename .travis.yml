@@ -10,7 +10,7 @@ stages:
   - name: publish
     if: tag IS present
   - name: docs
-    if: tag IS present
+    if: branch = master AND type != pull_request
 
 jobs:
   include:
@@ -43,7 +43,7 @@ jobs:
     - name: "Publish from OSX"
       stage: publish
       os: osx
-      script: npm run publish
+      script: npm install --save-dev macos-alias && npm run publish
     - name: "Publish from Windows"
       stage: publish
       os: windows
