@@ -31,6 +31,9 @@ ipcRenderer.on('create-report-reply', (event, arg) => {
   document.getElementById('output').innerHTML = reportHTML;
   init(); // eslint-disable-line no-undef
 });
+ipcRenderer.on('toggle-loading-ind', () => {
+  toggleLoadingInd();
+});
 
 const createReport = () => {
   tag = document.getElementById('tagBox').value;
