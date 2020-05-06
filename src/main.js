@@ -39,7 +39,9 @@ const checkForUpdates = () => {
     }
   });
   updater.on('update-downloading', (meta) => { // eslint-disable-line no-unused-vars
-    ipcMain.send('toggle-loading-ind');
+    mainWindow.webContents.executeJavaScript(`
+       toggleLoadingInd();
+     `);
   });
   updater.on('update-downloaded', (meta) => { // eslint-disable-line no-unused-vars
     updater.quitAndInstall();
