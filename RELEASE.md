@@ -3,11 +3,13 @@
 Releasing the project requires these steps:
 
 0. Upgrade dependency versions as necessary. (See: `npm audit`)
-1. Run `npm version *major|minor|patch*` (this project uses [semantic versioning](http://semver.org/))
-2. Push new commit to master and push the newly created tag (this will trigger a Travis build)
-3. Wait for the Travis build to complete
-4. Add changelog information to the GitHub release (include relevant changes from cucumber-forge-report-generator)
-5. Update the versions in the `updates.json` file to reflect the new release version (this will trigger the clients to auto-update)
+1. Validate the auto-update functionality still works for the new version of the app using the [testSimpleUpdater-win32-x64.sh](.simpleUpdater/testSimpleUpdater-win32-x64.sh) script (Note this will reinstall Cucumber Forge Desktop locally)
+2. Run `npm version *major|minor|patch*` (this project uses [semantic versioning](http://semver.org/))
+3. Push new commit to master and push the newly created tag (this will trigger a Travis build)
+4. Wait for the Travis build to complete
+5. Add changelog information to the GitHub release (include relevant changes from cucumber-forge-report-generator)
+6. Update the versions in the `updates.json` file to reflect the new release version (this will trigger the clients to auto-update)
+7. Install an older version of the app and verify that it properly auto-updates
 
 ## GitHub Release Template
 
