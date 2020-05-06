@@ -40,8 +40,8 @@ const checkForUpdates = () => {
   });
   updater.on('update-downloading', (meta) => { // eslint-disable-line no-unused-vars
     mainWindow.webContents.executeJavaScript(`
-       toggleLoadingInd();
-     `);
+      toggleLoadingInd();
+    `);
   });
   updater.on('update-downloaded', (meta) => { // eslint-disable-line no-unused-vars
     updater.quitAndInstall();
