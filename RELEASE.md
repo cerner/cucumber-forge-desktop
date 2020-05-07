@@ -2,6 +2,8 @@
 
 Releasing the project requires these steps:
 
+> Note that the current release steps require a Windows system with a bash client (such as the one included with [Git for Windows](https://gitforwindows.org/)).
+
 0. Upgrade dependency versions as necessary. (See: `npm audit`)
 1. Validate the auto-update functionality still works for the new version of the app using the [testSimpleUpdater-win32-x64.sh](.simpleUpdater/testSimpleUpdater-win32-x64.sh) script (Note this will reinstall Cucumber Forge Desktop locally)
 2. Run `npm version *major|minor|patch*` (this project uses [semantic versioning](http://semver.org/))
