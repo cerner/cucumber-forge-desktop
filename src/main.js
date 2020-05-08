@@ -28,16 +28,15 @@ const checkForUpdates = () => {
       message: meta.version,
       detail: 'A new version of Cucumber Forge is available.',
     };
-    dialog.showMessageBox(dialogOpts, (response) => {
-      if (response === 0) {
-        // Currently only support auto-updates on Windows
-        if (process.platform === 'win32') {
-          updater.downloadUpdate();
-        } else {
-          shell.openExternal('https://github.com/cerner/cucumber-forge-desktop/releases');
-        }
+    const response = dialog.showMessageBoxSync(dialogOpts);
+    if (response === 0) {
+      // Currently only support auto-updates on Windows
+      if (process.platform === 'win32') {
+        updater.downloadUpdate();
+      } else {
+        shell.openExternal('https://github.com/cerner/cucumber-forge-desktop/releases');
       }
-    });
+    }
   });
   updater.on('update-downloading', (meta) => { // eslint-disable-line no-unused-vars
     mainWindow.webContents.executeJavaScript(`
