@@ -1,16 +1,16 @@
 {
   "win32-x64-prod": {
-    "readme": "Forth Release",
-    "update": "https://github.com/cerner/cucumber-forge-desktop/releases/download/v0.4.1",
-    "install": "https://github.com/cerner/cucumber-forge-desktop/releases/download/v0.4.1/cucumber-forge-desktop-win32-x64-0.4.1-Setup.exe",
-    "version": "0.4.1"
+    "readme": "1.0.0 Release",
+    "update": "https://github.com/cerner/cucumber-forge-desktop/releases/download/v1.0.0",
+    "install": "https://github.com/cerner/cucumber-forge-desktop/releases/download/v1.0.0/cucumber-forge-desktop-win32-x64-1.0.0-Setup.exe",
+    "version": "1.0.0-ERROR-Cannot.automatically.update"
   },
   "darwin-x64-prod": {
-    "readme": "Third Release",
-    "version": "0.4.1"
+    "readme": "1.0.0 Release",
+    "version": "1.0.0"
   },
   "linux-x64-prod": {
-    "readme": "Third Release",
-    "version": "0.4.1"
+    "readme": "1.0.0 Release",
+    "version": "1.0.0"
   }
 }
