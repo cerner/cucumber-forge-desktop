@@ -4,6 +4,9 @@ const {
 const updater = require('electron-simple-updater');
 const log = require('electron-log');
 const Generator = require('cucumber-forge-report-generator');
+const Store = require('electron-store');
+
+const store = new Store();
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -115,7 +118,7 @@ const generator = new Generator();
 ipcMain.on('create-report-request', (event, request) => {
   let report = '';
   try {
-    report = generator.generate(request.folderPath, request.projectName, request.tag);
+    report = generator.generate(request.folderPath, request.projectName, request.tag, store.get('gherkinDialect'));
   } catch (error) {
     dialog.showErrorBox('Error Generating Report', error.message);
   }
