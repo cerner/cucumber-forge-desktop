@@ -41,6 +41,9 @@
         margin-top: 8.25em !important;
         margin-bottom: 7em !important;
       }
+      #dialectSelection {
+        width: 8em;
+      }
     </style>
   </head>
   <body id="appBody" class="empty">
@@ -68,7 +71,7 @@
         </div>
         <!-- SETTINGS BUTTON -->
         <div class="input-group input-group-sm bg-primary ml-2">
-          <button id="settingsButton" type="button" onclick="toggleSettingsVisibility()" class="btn btn-info btn-sm"><i class="fa fa-lg fa-cog text-white"></i></button>
+          <button id="appSettingsButton" type="button" onclick="toggleSettingsVisibility()" class="btn btn-info btn-sm"><i class="fa fa-lg fa-cog text-white"></i></button>
         </div>
       </form>
     </nav>
@@ -78,7 +81,7 @@
         <hr>
         <form>
           <div class="form-group">
-            <label for="dialectSelection">Gherkin Dialect</label>
+            <label for="dialectSelection">Default Gherkin Dialect:</label>
             <select id="dialectSelection" class="form-control" onchange="changeGherkinDialect()">
               <!-- Options are added programmatically -->
             </select>
