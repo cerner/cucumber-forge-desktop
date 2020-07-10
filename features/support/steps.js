@@ -73,15 +73,15 @@ When('the user selects the {string} directory with the folder selection button',
 });
 
 When('the user enters the value {string} into the filter text box', function (tag) {
-  return this.app.client.addValue('#tagBox', tag);
+  return this.app.client.$('#tagBox').then((tagBoxElem) => tagBoxElem.addValue(tag));
 });
 
 When('the user clicks the filter button', function () {
-  return this.app.client.waitUntilWindowLoaded().click('#tagButton');
+  return this.app.client.$('#tagButton').then((buttonElem) => buttonElem.click());
 });
 
 When('the user presses enter', function () {
-  return this.app.client.addValue('#tagBox', '\n');
+  return this.app.client.$('#tagBox').then((tagBoxElem) => tagBoxElem.addValue('\n'));
 });
 
 When('the user clicks the save button', function () {
@@ -91,10 +91,28 @@ When('the user clicks the save button', function () {
   });
 });
 
-Then(/the report (?:will be|is) displayed/, { timeout: 60 * 1000 }, function () {
-  // Wait for a second for the loading ind to disappear
-  return this.app.client.waitUntilWindowLoaded().getText('#output')
-    .should.eventually.not.equal('');
+When('the user clicks the settings button', function () {
+  return this.app.client.$('#appSettingsButton').then((element) => element.click());
+});
+
+When('the user selects {string} from the Default Gherkin Dialect drop-down menu', function (dialect) {
+  return this.app.client.$('#dialectSelection').then((element) => element.selectByVisibleText(dialect));
+});
+
+Then(/the report (?:will be|is) (displayed|hidden)/, { timeout: 60 * 1000 }, async function (reportStatus) {
+  const displayed = reportStatus === 'displayed';
+  const outputElem = await this.app.client.$('#output');
+  if (displayed) {
+    const outputText = await outputElem.getText();
+    expect(outputText).to.not.equal('');
+  }
+  const isDisplayed = await outputElem.isDisplayed();
+  expect(isDisplayed).to.equal(displayed);
+});
+
+Then(/the settings view will be (displayed|hidden)/, function (settingsStatus) {
+  const displayed = settingsStatus === 'displayed';
+  return this.app.client.$('#appSettings').then((settingsElem) => settingsElem.isDisplayed().should.eventually.equal(displayed));
 });
 
 Then('the report will be saved in a file called {string}', function (fileName) {
@@ -103,15 +121,11 @@ Then('the report will be saved in a file called {string}', function (fileName) {
 });
 
 Then(/^the report name on the sidebar (?:is|will be) '(.+)'$/, function (reportTitle) {
-  return this.app.client.getText('#sidenavTitle').then((reportText) => {
-    expect(reportText).to.eql(reportTitle);
-  });
+  return this.app.client.$('#sidenavTitle').then((sideNavElem) => sideNavElem.getText()).then((text) => expect(text).to.equal(reportTitle));
 });
 
 Then(/^the project title on the sidebar (?:is|will be) '(\w+)'$/, function (projectTitle) {
-  return this.app.client.getText('#headerTitle').then((reportText) => {
-    expect(reportText).to.eql(projectTitle);
-  });
+  return this.app.client.$('#headerTitle').then((titleElem) => titleElem.getText()).then((reportText) => expect(reportText).to.eql(projectTitle));
 });
 
 Then(/^the report will contain (\d+) features?$/, function (featureCount) {
@@ -120,10 +134,10 @@ Then(/^the report will contain (\d+) features?$/, function (featureCount) {
   });
 });
 
-Then(/^the report (?:will contain|contains) (\d+) scenarios?$/, function (scenarioCount) {
-  return this.app.client.$$('.feature-wrapper').then((features) => this.app.client.$$('.scenario-divider').then((scenarios) => {
-    expect(scenarios.length).to.eql(scenarioCount - features.length);
-  }));
+Then(/^the report (?:will contain|contains) (\d+) scenarios?$/, async function (scenarioCount) {
+  const features = await this.app.client.$$('.feature-wrapper');
+  const scenarios = await this.app.client.$$('.scenario-body');
+  expect(scenarios.length).to.eql(scenarioCount + features.length);
 });
 
 After({ timeout: 119 * 1000 }, function () {
