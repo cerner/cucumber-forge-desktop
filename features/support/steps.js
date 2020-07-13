@@ -99,7 +99,7 @@ When('the user selects {string} from the Default Gherkin Dialect drop-down menu'
   return this.app.client.$('#dialectSelection').then((element) => element.selectByVisibleText(dialect));
 });
 
-Then(/the report (?:will be|is) (displayed|hidden)/, { timeout: 60 * 1000 }, async function (reportStatus) {
+Then(/the report (?:will be|is) (displayed|hidden)/, { timeout: 60000 }, async function (reportStatus) {
   const displayed = reportStatus === 'displayed';
   const outputElem = await this.app.client.$('#output');
   if (displayed) {
@@ -112,7 +112,8 @@ Then(/the report (?:will be|is) (displayed|hidden)/, { timeout: 60 * 1000 }, asy
 
 Then(/the settings view will be (displayed|hidden)/, function (settingsStatus) {
   const displayed = settingsStatus === 'displayed';
-  return this.app.client.$('#appSettings').then((settingsElem) => settingsElem.isDisplayed().should.eventually.equal(displayed));
+  return this.app.client.$('#appSettings')
+    .then((settingsElem) => settingsElem.isDisplayed().should.eventually.equal(displayed));
 });
 
 Then('the report will be saved in a file called {string}', function (fileName) {
@@ -121,11 +122,15 @@ Then('the report will be saved in a file called {string}', function (fileName) {
 });
 
 Then(/^the report name on the sidebar (?:is|will be) '(.+)'$/, function (reportTitle) {
-  return this.app.client.$('#sidenavTitle').then((sideNavElem) => sideNavElem.getText()).then((text) => expect(text).to.equal(reportTitle));
+  return this.app.client.$('#sidenavTitle')
+    .then((sideNavElem) => sideNavElem.getText())
+    .then((text) => expect(text).to.equal(reportTitle));
 });
 
 Then(/^the project title on the sidebar (?:is|will be) '(\w+)'$/, function (projectTitle) {
-  return this.app.client.$('#headerTitle').then((titleElem) => titleElem.getText()).then((reportText) => expect(reportText).to.eql(projectTitle));
+  return this.app.client.$('#headerTitle')
+    .then((titleElem) => titleElem.getText())
+    .then((reportText) => expect(reportText).to.eql(projectTitle));
 });
 
 Then(/^the report will contain (\d+) features?$/, function (featureCount) {
