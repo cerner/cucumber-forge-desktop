@@ -101,19 +101,3 @@ Feature: Generate Report
       | action:                  |
       | clicks the filter button |
       | presses enter            |
-  
-  Scenario: Saving an HTML report
-    Given the user selects the 'pets/felines' directory with the folder selection button
-    And the report is displayed
-    And the project title on the sidebar is 'felines'
-    When the user clicks the save button
-    Then the report will be saved in a file called 'felines.html'
-
-  Scenario: Saving an HTML report that is filtered by a tag
-    Given the user enters the value 'feeding' into the filter text box
-    And the user selects the 'pets' directory with the folder selection button
-    And the report is displayed
-    And the report name on the sidebar is 'feeding'
-    And the project title on the sidebar is 'pets'
-    When the user clicks the save button
-    Then the report will be saved in a file called 'feeding_pets.html'

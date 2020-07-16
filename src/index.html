@@ -3,9 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Cucumber Forge</title>
-    <script type="text/javascript" src="render.js"></script>
-    <script type="text/javascript" src="../node_modules/cucumber-forge-report-generator/src/templates/scripts.js"></script>
-    <link href="../node_modules/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../node_modules/@fortawesome/fontawesome-free/css/all.css" rel="stylesheet">
     <link href="../node_modules/bootswatch/dist/flatly/bootstrap.min.css" rel="stylesheet">
     <style>
       @import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Mono|Roboto+Slab');
@@ -27,6 +25,14 @@
         top:0;
         z-index:9999;
       }
+      #appSettings {
+        color: #f1f1f1;
+        display: none;
+      }
+      #appSettings hr {
+        color: #f1f1f1;
+        border-color: #f1f1f1;
+      }
       /* Couple of style tweaks for the report to deal with offset from the navbar */
       a.anchor {
         top: calc(-72.38px - 1.5em) !important;
@@ -35,13 +41,15 @@
         margin-top: 8.25em !important;
         margin-bottom: 7em !important;
       }
+      #dialectSelection {
+        width: 8em;
+      }
     </style>
   </head>
-
   <body id="appBody" class="empty">
     <div id="mask"></div>
     <nav class="navbar navbar-dark bg-primary fixed-top">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="https://github.com/cerner/cucumber-forge-desktop/issues" target="_blank" rel="noopener">
         <img src="./resources/png/CucumberForge_48.png" width="30" height="30" class="d-inline-block align-top" alt="">
         Cucumber Forge
       </a>
@@ -61,8 +69,37 @@
         <div class="input-group input-group-sm bg-primary ml-2">
           <button id="saveButton" type="button" onclick="clickSaveButton()" class="btn btn-info btn-sm"><i class="fa fa-lg fa-save text-white"></i></button>
         </div>
+        <!-- SETTINGS BUTTON -->
+        <div class="input-group input-group-sm bg-primary ml-2">
+          <button id="appSettingsButton" type="button" onclick="toggleSettingsVisibility()" class="btn btn-info btn-sm"><i class="fa fa-lg fa-cog text-white"></i></button>
+        </div>
       </form>
     </nav>
+    <div id="appSettings">
+      <div class="container">
+        <h1>Settings</h1>
+        <hr>
+        <form>
+          <div class="form-group">
+            <label for="dialectSelection">Default Gherkin Dialect:</label>
+            <select id="dialectSelection" class="form-control" onchange="changeGherkinDialect()">
+              <!-- Options are added programmatically -->
+            </select>
+          </div>
+        </form>
+        <hr>
+        <p><div id="appVersion"></div></p>
+        <p><a href="https://github.com/cerner/cucumber-forge-desktop" target="_blank" rel="noopener"><i class="fab fa-github"></i> Source Code</a></p>
+        <p><a href="https://engineering.cerner.com/cucumber-forge-desktop" target="_blank" rel="noopener"><i class="fas fa-book"></i> Documentation</a></p>
+        <p><a href="https://github.com/cerner/cucumber-forge-desktop/issues" target="_blank" rel="noopener"><i class="fas fa-question-circle"></i> Support</a></p>
+        <p>Icons courtesy of <a href="https://fontawesome.com/license/free" target="_blank" rel="noopener"><i class="fab fa-font-awesome" title="FontAwesome"></i></a>
+          licensed under <a href="https://creativecommons.org/licenses/by/4.0/legalcode" target="_blank" rel="noopener"><i class="fab fa-creative-commons" title="Creative Commons"></i><i class="fab fa-creative-commons-by" title="CC BY"></i></a>.</p>
+      </div>
+    </div>
     <div id="output"></div>
   </body>
+  <footer>
+    <script type="text/javascript" src="../node_modules/cucumber-forge-report-generator/src/templates/scripts.js"></script>
+    <script type="text/javascript" src="render.js"></script>
+  </footer>
 </html>
