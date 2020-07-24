@@ -29,7 +29,7 @@
     "forge": "./forge.config.js"
   },
   "updater": {
-    "url": "https://raw.githubusercontent.com/cerner/cucumber-forge-desktop/master/updates.json",
+    "url": "https://raw.githubusercontent.com/cerner/cucumber-forge-desktop/main/updates.json",
     "autoDownload": false
   },
   "dependencies": {

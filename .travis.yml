@@ -10,7 +10,7 @@ stages:
   - name: publish
     if: tag IS present
   - name: docs
-    if: branch = master AND type != pull_request
+    if: branch = main AND type != pull_request
 
 jobs:
   include:

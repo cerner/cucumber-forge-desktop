@@ -25,7 +25,7 @@ module.exports = {
         exe: 'cucumber-forge.exe',
         setupIcon: './src/resources/icons/logo.ico',
         loadingGif: './src/resources/loading.gif',
-        iconUrl: 'https://raw.githubusercontent.com/cerner/cucumber-forge-desktop/master/src/resources/icons/logo.ico',
+        iconUrl: 'https://raw.githubusercontent.com/cerner/cucumber-forge-desktop/main/src/resources/icons/logo.ico',
       },
     },
     {
