@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { remote, ipcRenderer } = require('electron');
 const Store = require('electron-store');
-const SUPPORTED_LANGUAGES = require('../node_modules/cucumber-forge-report-generator/src/locales/supportedLocales.json');
+const Generator = require('cucumber-forge-report-generator');
 
 const store = new Store();
 const fileEncoding = 'utf-8';
@@ -138,7 +138,7 @@ const initSettings = () => {
 
   // Populate the dialect selector
   const dialectSelector = document.getElementById('dialectSelection');
-  SUPPORTED_LANGUAGES.forEach((language) => {
+  Generator.SUPPORTED_DIALECTS.forEach((language) => {
     const opt = document.createElement('option');
     opt.value = language;
     opt.innerHTML = language;
