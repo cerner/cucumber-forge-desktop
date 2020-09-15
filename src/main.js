@@ -28,7 +28,7 @@ const checkForUpdates = () => {
       type: 'info',
       buttons: ['Update', 'Later'],
       title: 'Cucumber Forge Update',
-      message: `A new version of Cucumber Forge is available! ${meta.version}`,
+      message: 'A new version of Cucumber Forge is available!',
       detail: meta.readme,
     };
     const response = dialog.showMessageBoxSync(dialogOpts);
