@@ -25,14 +25,6 @@
         top:0;
         z-index:9999;
       }
-      #appSettings {
-        color: #f1f1f1;
-        display: none;
-      }
-      #appSettings hr {
-        color: #f1f1f1;
-        border-color: #f1f1f1;
-      }
       /* Couple of style tweaks for the report to deal with offset from the navbar */
       a.anchor {
         top: calc(-72.38px - 1.5em) !important;
@@ -101,5 +93,19 @@
   <footer>
     <script type="text/javascript" src="../node_modules/cucumber-forge-report-generator/src/templates/scripts.js"></script>
     <script type="text/javascript" src="render.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script>
+      const options = {
+        bottom: '64px', // default: '32px'
+        right: '32px', // default: '32px'
+        saveInCookies: false, // default: true,
+        label: '🌓', // default: ''
+      };
+      const darkmode = new Darkmode(options);
+      function addDarkmodeWidget() {
+        darkmode.showWidget();
+      }
+      window.addEventListener('load', addDarkmodeWidget);
+    </script>
   </footer>
 </html>
