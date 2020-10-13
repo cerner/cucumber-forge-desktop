@@ -5,6 +5,11 @@ const { remote, ipcRenderer } = require('electron');
 const Store = require('electron-store');
 const Generator = require('cucumber-forge-report-generator');
 
+const DarkMode = require('darkmode-js');
+
+let darkmode = null;
+let darkModeCheckBox = null;
+
 const store = new Store();
 const fileEncoding = 'utf-8';
 
@@ -12,6 +17,22 @@ let selectedFolderPath;
 let projectName;
 let reportHTML;
 let tag;
+
+const initDarkMode = () => {
+  darkModeCheckBox = document.getElementById('darkMode');
+  if (darkModeCheckBox) {
+    darkModeCheckBox.addEventListener('click', () => {
+      if (darkModeCheckBox.checked && darkmode == null) {
+        const options = {
+          buttonColorDark: 'grey',
+        };
+        darkmode = new DarkMode(options);
+      } else {
+        darkmode.toggle();
+      }
+    });
+  }
+};
 
 const toggleLoadingInd = () => {
   if (reportHTML) {
@@ -30,12 +51,20 @@ const toggleLoadingInd = () => {
 
 const toggleSettingsVisibility = () => {
   const settingsDiv = document.getElementById('appSettings');
+  initDarkMode();
   if (!settingsDiv.style.display || settingsDiv.style.display === 'none') {
     // Settings are currently hidden. Un-hide them.
     if (reportHTML) {
       // If there is a report, hide it.
       document.getElementById('appBody').classList.add('empty');
       document.getElementById('output').style.display = 'none';
+      if (darkModeCheckBox && !darkModeCheckBox.checked && darkmode && !darkmode.isActivated()) {
+        settingsDiv.style.color = '#222222';
+      } else if (darkmode && darkmode.isActivated()) {
+        settingsDiv.style.color = '#f1f1f1';
+      }
+    } else {
+      settingsDiv.style.color = '#f1f1f1';
     }
     settingsDiv.style.display = 'block';
   } else {
@@ -45,6 +74,11 @@ const toggleSettingsVisibility = () => {
       // If there is a report, un-hide it.
       document.getElementById('appBody').classList.remove('empty');
       document.getElementById('output').style.display = 'block';
+      if (darkModeCheckBox && !darkModeCheckBox.checked && darkmode && !darkmode.isActivated()) {
+        settingsDiv.style.color = '#222222';
+      } else if (darkmode && darkmode.isActivated()) {
+        settingsDiv.style.color = '#f1f1f1';
+      }
     }
   }
 };
@@ -58,6 +92,7 @@ ipcRenderer.on('create-report-reply', (event, arg) => {
 
   toggleLoadingInd();
   document.getElementById('output').innerHTML = reportHTML;
+  initDarkMode();
   init(); // eslint-disable-line no-undef
 });
 
@@ -138,15 +173,17 @@ const initSettings = () => {
 
   // Populate the dialect selector
   const dialectSelector = document.getElementById('dialectSelection');
-  Generator.SUPPORTED_DIALECTS.forEach((language) => {
-    const opt = document.createElement('option');
-    opt.value = language;
-    opt.innerHTML = language;
-    dialectSelector.appendChild(opt);
-    if (gherkinDialect === language) {
-      opt.selected = 'selected';
-    }
-  });
+  if (Generator.SUPPORTED_DIALECTS) {
+    Generator.SUPPORTED_DIALECTS.forEach((language) => {
+      const opt = document.createElement('option');
+      opt.value = language;
+      opt.innerHTML = language;
+      dialectSelector.appendChild(opt);
+      if (gherkinDialect === language) {
+        opt.selected = 'selected';
+      }
+    });
+  }
 
   // Set version
   document.getElementById('appVersion').innerHTML = `Version: ${remote.app.getVersion()}`;
