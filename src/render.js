@@ -22,15 +22,15 @@ const initDarkMode = () => {
   darkModeCheckBox = document.getElementById('darkMode');
   if (darkModeCheckBox) {
     darkModeCheckBox.addEventListener('click', () => {
-      if (darkModeCheckBox.checked && darkmode == null) {
-        const options = {
-          buttonColorDark: 'grey',
-        };
-        darkmode = new DarkMode(options);
+      if (!darkmode) {
+        darkmode = new DarkMode();
       } else {
         darkmode.toggle();
       }
     });
+  }
+  if (darkmode && darkmode.isActivated()) {
+    darkmode.toggle();
   }
 };
 
@@ -51,20 +51,13 @@ const toggleLoadingInd = () => {
 
 const toggleSettingsVisibility = () => {
   const settingsDiv = document.getElementById('appSettings');
-  initDarkMode();
+  const appBody = document.getElementById('appBody');
   if (!settingsDiv.style.display || settingsDiv.style.display === 'none') {
     // Settings are currently hidden. Un-hide them.
     if (reportHTML) {
       // If there is a report, hide it.
-      document.getElementById('appBody').classList.add('empty');
+      appBody.classList.add('empty');
       document.getElementById('output').style.display = 'none';
-      if (darkModeCheckBox && !darkModeCheckBox.checked && darkmode && !darkmode.isActivated()) {
-        settingsDiv.style.color = '#222222';
-      } else if (darkmode && darkmode.isActivated()) {
-        settingsDiv.style.color = '#f1f1f1';
-      }
-    } else {
-      settingsDiv.style.color = '#f1f1f1';
     }
     settingsDiv.style.display = 'block';
   } else {
@@ -72,14 +65,19 @@ const toggleSettingsVisibility = () => {
     settingsDiv.style.display = 'none';
     if (reportHTML) {
       // If there is a report, un-hide it.
-      document.getElementById('appBody').classList.remove('empty');
+      appBody.classList.remove('empty');
       document.getElementById('output').style.display = 'block';
-      if (darkModeCheckBox && !darkModeCheckBox.checked && darkmode && !darkmode.isActivated()) {
-        settingsDiv.style.color = '#222222';
-      } else if (darkmode && darkmode.isActivated()) {
-        settingsDiv.style.color = '#f1f1f1';
-      }
     }
+  }
+
+  if (darkmode && !darkmode.isActivated()) {
+    const darkModeReady = document.getElementsByClassName('darkmode-background');
+    console.log(darkModeReady.length);
+    if (darkModeReady.length > 0) {
+      settingsDiv.style.color = '#222222';
+    }
+  } else if (darkmode && darkmode.isActivated()) {
+    settingsDiv.style.color = '#f1f1f1';
   }
 };
 
