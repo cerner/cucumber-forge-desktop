@@ -20,19 +20,14 @@ let tag;
 
 const initDarkMode = () => {
   darkModeCheckBox = document.getElementById('darkMode');
-  if (darkModeCheckBox) {
-    darkModeCheckBox.addEventListener('click', () => {
-      if (!darkMode) {
-        darkMode = new DarkMode();
-        darkMode.toggle();
-      } else {
-        darkMode.toggle();
-      }
-    });
-  }
-  if (darkMode && darkMode.isActivated()) {
+  const options = {
+    saveInCookies: false, // default: true,
+    autoMatchOsTheme: true, // default: true
+  };
+  darkMode = new DarkMode(options);
+  darkModeCheckBox.addEventListener('click', () => {
     darkMode.toggle();
-  }
+  });
 };
 
 const toggleLoadingInd = () => {
@@ -70,15 +65,6 @@ const toggleSettingsVisibility = () => {
       document.getElementById('output').style.display = 'block';
     }
   }
-
-  if (darkMode && !darkMode.isActivated()) {
-    const darkModeReady = document.getElementsByClassName('darkmode-background');
-    if (darkModeReady.length > 0) {
-      settingsDiv.style.color = '#222222';
-    }
-  } else if (darkMode && darkMode.isActivated()) {
-    settingsDiv.style.color = '#f1f1f1';
-  }
 };
 
 ipcRenderer.on('create-report-reply', (event, arg) => {
@@ -90,7 +76,6 @@ ipcRenderer.on('create-report-reply', (event, arg) => {
 
   toggleLoadingInd();
   document.getElementById('output').innerHTML = reportHTML;
-  initDarkMode();
   init(); // eslint-disable-line no-undef
 });
 
@@ -185,4 +170,5 @@ const initSettings = () => {
   document.getElementById('appVersion').innerHTML = `Version: ${remote.app.getVersion()}`;
 };
 
+initDarkMode();
 initSettings();

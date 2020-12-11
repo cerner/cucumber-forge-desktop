@@ -26,9 +26,10 @@
         z-index:9999;
       }
       #appSettings {
+        isolation: isolate !important;
+        mix-blend-mode: difference;
         color: #f1f1f1;
         display: none;
-        isolation: isolate;
       }
       #appSettings hr {
         color: #f1f1f1;
@@ -76,7 +77,7 @@
         </div>
       </form>
     </nav>
-    <div class="darkmode-ignore" id="appSettings">
+    <div id="appSettings">
       <div class="container">
         <h1>Settings</h1>
         <hr>
@@ -84,6 +85,8 @@
           <div class="form-group">
             <label for="dialectSelection">Default Gherkin Dialect:</label>
             <select id="dialectSelection" class="form-control" onchange="changeGherkinDialect()">
+              <br/>
+            <input type="checkbox" id="darkMode"><label for="darkMode"> Dark Mode </label>
               <!-- Options are added programmatically -->
             </select>
           </div>
