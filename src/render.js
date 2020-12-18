@@ -8,10 +8,28 @@ const Generator = require('cucumber-forge-report-generator');
 const store = new Store();
 const fileEncoding = 'utf-8';
 
+let darkModeCheckBox;
 let selectedFolderPath;
 let projectName;
 let reportHTML;
 let tag;
+
+const initDarkMode = () => {
+  darkModeCheckBox = document.getElementById('darkMode');
+  let darkMode = store.get('darkmodeOption');
+  if(darkMode == 1) {
+    document.getElementById('output').classList.toggle('dark');
+    document.getElementById('appBody').classList.toggle('dark');
+    darkModeCheckBox.checked = true;
+  }
+
+  darkModeCheckBox.addEventListener('click', () => {
+    document.getElementById('output').classList.toggle('dark');
+    document.getElementById('appBody').classList.toggle('dark');
+    console.log("Box is checked: " + darkModeCheckBox.checked);
+    store.set('darkmodeOption', darkModeCheckBox.checked ? 1 : 0);
+  });
+};
 
 const toggleLoadingInd = () => {
   if (reportHTML) {
@@ -150,6 +168,7 @@ const initSettings = () => {
 
   // Set version
   document.getElementById('appVersion').innerHTML = `Version: ${remote.app.getVersion()}`;
+  initDarkMode();
 };
 
 initSettings();

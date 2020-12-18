@@ -15,6 +15,14 @@
       body.empty {
         background-color: rgb(50,50,50);
       }
+      body.dark {
+        background-color:  #272525;
+      }
+      #output.dark, #output.dark td, #output.dark th, #output.dark pre {
+        background-color:  #272525;
+        color: #f1f1f1;
+        border-color: #f1f1f1;
+      }
       #mask {
         display: none;
         position:fixed;
@@ -84,7 +92,10 @@
             <label for="dialectSelection">Default Gherkin Dialect:</label>
             <select id="dialectSelection" class="form-control" onchange="changeGherkinDialect()">
               <!-- Options are added programmatically -->
+
             </select>
+            <br/>
+            <input type="checkbox" id="darkMode">Dark Mode<label for="darkMode">
           </div>
         </form>
         <hr>
