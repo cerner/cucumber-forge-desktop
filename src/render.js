@@ -47,11 +47,12 @@ const toggleLoadingInd = () => {
 
 const toggleSettingsVisibility = () => {
   const settingsDiv = document.getElementById('appSettings');
+  const appBody = document.getElementById('appBody');
   if (!settingsDiv.style.display || settingsDiv.style.display === 'none') {
     // Settings are currently hidden. Un-hide them.
     if (reportHTML) {
       // If there is a report, hide it.
-      document.getElementById('appBody').classList.add('empty');
+      appBody.classList.add('empty');
       document.getElementById('output').style.display = 'none';
     }
     settingsDiv.style.display = 'block';
@@ -60,9 +61,18 @@ const toggleSettingsVisibility = () => {
     settingsDiv.style.display = 'none';
     if (reportHTML) {
       // If there is a report, un-hide it.
-      document.getElementById('appBody').classList.remove('empty');
+      appBody.classList.remove('empty');
       document.getElementById('output').style.display = 'block';
     }
+  }
+
+  if (darkMode && !darkMode.isActivated()) {
+    const darkModeReady = document.getElementsByClassName('darkmode-background');
+    if (darkModeReady.length > 0) {
+      settingsDiv.style.color = '#222222';
+    }
+  } else if (darkMode && darkMode.isActivated()) {
+    settingsDiv.style.color = '#f1f1f1';
   }
 };
 
@@ -75,6 +85,7 @@ ipcRenderer.on('create-report-reply', (event, arg) => {
 
   toggleLoadingInd();
   document.getElementById('output').innerHTML = reportHTML;
+  initDarkMode();
   init(); // eslint-disable-line no-undef
 });
 
