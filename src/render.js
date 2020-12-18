@@ -16,8 +16,8 @@ let tag;
 
 const initDarkMode = () => {
   darkModeCheckBox = document.getElementById('darkMode');
-  let darkMode = store.get('darkmodeOption');
-  if(darkMode == 1) {
+  const darkMode = store.get('darkmodeOption');
+  if (darkMode === 1) {
     document.getElementById('output').classList.toggle('dark');
     document.getElementById('appBody').classList.toggle('dark');
     darkModeCheckBox.checked = true;
@@ -26,7 +26,6 @@ const initDarkMode = () => {
   darkModeCheckBox.addEventListener('click', () => {
     document.getElementById('output').classList.toggle('dark');
     document.getElementById('appBody').classList.toggle('dark');
-    console.log("Box is checked: " + darkModeCheckBox.checked);
     store.set('darkmodeOption', darkModeCheckBox.checked ? 1 : 0);
   });
 };
