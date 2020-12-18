@@ -65,15 +65,6 @@ const toggleSettingsVisibility = () => {
       document.getElementById('output').style.display = 'block';
     }
   }
-
-  if (darkMode && !darkMode.isActivated()) {
-    const darkModeReady = document.getElementsByClassName('darkmode-background');
-    if (darkModeReady.length > 0) {
-      settingsDiv.style.color = '#222222';
-    }
-  } else if (darkMode && darkMode.isActivated()) {
-    settingsDiv.style.color = '#f1f1f1';
-  }
 };
 
 ipcRenderer.on('create-report-reply', (event, arg) => {
@@ -85,7 +76,6 @@ ipcRenderer.on('create-report-reply', (event, arg) => {
 
   toggleLoadingInd();
   document.getElementById('output').innerHTML = reportHTML;
-  initDarkMode();
   init(); // eslint-disable-line no-undef
 });
 
