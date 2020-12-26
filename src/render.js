@@ -8,15 +8,14 @@ const Generator = require('cucumber-forge-report-generator');
 const store = new Store();
 const fileEncoding = 'utf-8';
 
-let darkModeCheckBox;
 let selectedFolderPath;
 let projectName;
 let reportHTML;
 let tag;
 
 const initDarkMode = () => {
-  darkModeCheckBox = document.getElementById('darkMode');
-  const darkMode = store.get('darkmodeOption');
+  const darkModeCheckBox = document.getElementById('darkMode');
+  const darkMode = store.get('darkModeOption');
   if (darkMode === 1) {
     document.getElementById('output').classList.toggle('dark');
     document.getElementById('appBody').classList.toggle('dark');
@@ -26,7 +25,7 @@ const initDarkMode = () => {
   darkModeCheckBox.addEventListener('click', () => {
     document.getElementById('output').classList.toggle('dark');
     document.getElementById('appBody').classList.toggle('dark');
-    store.set('darkmodeOption', darkModeCheckBox.checked ? 1 : 0);
+    store.set('darkModeOption', darkModeCheckBox.checked ? 1 : 0);
   });
 };
 
