@@ -5,11 +5,6 @@ const { remote, ipcRenderer } = require('electron');
 const Store = require('electron-store');
 const Generator = require('cucumber-forge-report-generator');
 
-const DarkMode = require('darkmode-js');
-
-let darkMode = null;
-let darkModeCheckBox = null;
-
 const store = new Store();
 const fileEncoding = 'utf-8';
 
@@ -19,20 +14,19 @@ let reportHTML;
 let tag;
 
 const initDarkMode = () => {
-  darkModeCheckBox = document.getElementById('darkMode');
-  if (darkModeCheckBox) {
-    darkModeCheckBox.addEventListener('click', () => {
-      if (!darkMode) {
-        darkMode = new DarkMode();
-        darkMode.toggle();
-      } else {
-        darkMode.toggle();
-      }
-    });
+  const darkModeCheckBox = document.getElementById('darkMode');
+  const darkMode = store.get('darkModeOption');
+  if (darkMode === 1) {
+    document.getElementById('output').classList.toggle('dark');
+    document.getElementById('appBody').classList.toggle('dark');
+    darkModeCheckBox.checked = true;
   }
-  if (darkMode && darkMode.isActivated()) {
-    darkMode.toggle();
-  }
+
+  darkModeCheckBox.addEventListener('click', () => {
+    document.getElementById('output').classList.toggle('dark');
+    document.getElementById('appBody').classList.toggle('dark');
+    store.set('darkModeOption', darkModeCheckBox.checked ? 1 : 0);
+  });
 };
 
 const toggleLoadingInd = () => {
@@ -70,15 +64,6 @@ const toggleSettingsVisibility = () => {
       document.getElementById('output').style.display = 'block';
     }
   }
-
-  if (darkMode && !darkMode.isActivated()) {
-    const darkModeReady = document.getElementsByClassName('darkmode-background');
-    if (darkModeReady.length > 0) {
-      settingsDiv.style.color = '#222222';
-    }
-  } else if (darkMode && darkMode.isActivated()) {
-    settingsDiv.style.color = '#f1f1f1';
-  }
 };
 
 ipcRenderer.on('create-report-reply', (event, arg) => {
@@ -90,7 +75,6 @@ ipcRenderer.on('create-report-reply', (event, arg) => {
 
   toggleLoadingInd();
   document.getElementById('output').innerHTML = reportHTML;
-  initDarkMode();
   init(); // eslint-disable-line no-undef
 });
 
@@ -183,6 +167,7 @@ const initSettings = () => {
 
   // Set version
   document.getElementById('appVersion').innerHTML = `Version: ${remote.app.getVersion()}`;
+  initDarkMode();
 };
 
 initSettings();
