@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" http-equiv="Content-Security-Policy" content="script-src 'self'">
     <title>Cucumber Forge</title>
     <link href="../node_modules/@fortawesome/fontawesome-free/css/all.css" rel="stylesheet">
     <link href="../node_modules/bootswatch/dist/flatly/bootstrap.min.css" rel="stylesheet">
@@ -64,22 +64,22 @@
       <form class="form-inline">
         <!-- FILTERING BOX -->
         <div class="input-group input-group-sm bg-primary">
-          <input id="tagBox" type="text" class="form-control form-control-sm" aria-label="Tags" href="#" onkeypress="submitTagFiltersFromTextBox(event)">
+          <input id="tagBox" type="text" class="form-control form-control-sm" aria-label="Tags" href="#">
           <div class="input-group-append">
-            <button id="tagButton" class="btn btn-info" type="button" href="#" onclick="clickFilterButton()"><i class="fa fa-lg fa-filter text-white"></i></button>
+            <button id="tagButton" class="btn btn-info" type="button" href="#"><i class="fa fa-lg fa-filter text-white"></i></button>
           </div>
         </div>
         <!-- SELECT DIRECTORY -->
         <div class="input-group input-group-sm bg-primary ml-2">
-          <button id="folderSelection" type="button" onclick="clickFolderSelectionButton()" class="btn btn-info btn-sm"><i class="fa fa-lg fa-folder-open text-white"></i></button>
+          <button id="folderSelection" type="button" class="btn btn-info btn-sm"><i class="fa fa-lg fa-folder-open text-white"></i></button>
         </div>
         <!-- SAVE BUTTON -->
         <div class="input-group input-group-sm bg-primary ml-2">
-          <button id="saveButton" type="button" onclick="clickSaveButton()" class="btn btn-info btn-sm"><i class="fa fa-lg fa-save text-white"></i></button>
+          <button id="saveButton" type="button" class="btn btn-info btn-sm"><i class="fa fa-lg fa-save text-white"></i></button>
         </div>
         <!-- SETTINGS BUTTON -->
         <div class="input-group input-group-sm bg-primary ml-2">
-          <button id="appSettingsButton" type="button" onclick="toggleSettingsVisibility()" class="btn btn-info btn-sm"><i class="fa fa-lg fa-cog text-white"></i></button>
+          <button id="appSettingsButton" type="button" class="btn btn-info btn-sm"><i class="fa fa-lg fa-cog text-white"></i></button>
         </div>
       </form>
     </nav>
@@ -90,7 +90,7 @@
         <form>
           <div class="form-group">
             <label for="dialectSelection">Default Gherkin Dialect:</label>
-            <select id="dialectSelection" class="form-control" onchange="changeGherkinDialect()">
+            <select id="dialectSelection" class="form-control">
               <!-- Options are added programmatically -->
 
             </select>
