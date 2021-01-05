@@ -146,6 +146,8 @@ const changeGherkinDialect = () => {
 };
 
 const initSettings = () => {
+  document.getElementById('dialectSelection').addEventListener('change', changeGherkinDialect);
+
   // Setup the current default dialect
   let gherkinDialect = store.get('gherkinDialect');
   if (!gherkinDialect) {
@@ -170,4 +172,13 @@ const initSettings = () => {
   initDarkMode();
 };
 
+const initNavBar = () => {
+  document.getElementById('tagBox').addEventListener('keypress', submitTagFiltersFromTextBox);
+  document.getElementById('tagButton').addEventListener('click', clickFilterButton);
+  document.getElementById('folderSelection').addEventListener('click', clickFolderSelectionButton);
+  document.getElementById('saveButton').addEventListener('click', clickSaveButton);
+  document.getElementById('appSettingsButton').addEventListener('click', toggleSettingsVisibility);
+};
+
+initNavBar();
 initSettings();
