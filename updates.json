@@ -1,16 +1,16 @@
 {
   "win32-x64-prod": {
-    "readme": "Add support for persisting settings to browser storage.",
-    "update": "https://github.com/cerner/cucumber-forge-desktop/releases/download/v1.2.1",
-    "install": "https://github.com/cerner/cucumber-forge-desktop/releases/download/v1.2.1/cucumber-forge-desktop-win32-x64-1.2.1-Setup.exe",
-    "version": "1.2.1"
+    "readme": "Support linking to an individual feature or scenario.\nAdd checkbox to enable dark mode in app.",
+    "update": "https://github.com/cerner/cucumber-forge-desktop/releases/download/v1.3.0",
+    "install": "https://github.com/cerner/cucumber-forge-desktop/releases/download/v1.3.0/cucumber-forge-desktop-win32-x64-1.3.0-Setup.exe",
+    "version": "1.3.0"
   },
   "darwin-x64-prod": {
-    "readme": "Add support for persisting settings to browser storage.",
-    "version": "1.2.1"
+    "readme": "Support linking to an individual feature or scenario.\nAdd checkbox to enable dark mode in app.",
+    "version": "1.3.0"
   },
   "linux-x64-prod": {
-    "readme": "Add support for persisting settings to browser storage.",
-    "version": "1.2.1"
+    "readme": "Support linking to an individual feature or scenario.\nAdd checkbox to enable dark mode in app.",
+    "version": "1.3.0"
   }
 }
