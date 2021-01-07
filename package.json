@@ -1,7 +1,7 @@
 {
   "name": "cucumber-forge-desktop",
   "productName": "cucumber-forge-desktop",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Cucumber Forge Desktop Application",
   "main": "src/main.js",
   "scripts": {
