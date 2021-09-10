@@ -36,7 +36,7 @@
     "@fortawesome/fontawesome-free": "^5.15.1",
     "bootstrap": "^4.5.3",
     "bootswatch": "^4.5.3",
-    "cucumber-forge-report-generator": "^1.4.0",
+    "cucumber-forge-report-generator": "^1.7.0",
     "electron-log": "^4.3.1",
     "electron-simple-updater": "^2.0.9",
     "electron-squirrel-startup": "^1.0.0",
