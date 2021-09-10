@@ -96,9 +96,9 @@ const createReportForFolder = (folderPath) => {
 };
 
 const getDefaultOutputFileName = () => {
-  let reportName = `${projectName}.htm`;
+  let reportName = `${projectName}.html`;
   if (tag) {
-    reportName = `${tag}_${reportName}.htm`;
+    reportName = `${tag}_${reportName}.html`;
   }
   return reportName;
 };
