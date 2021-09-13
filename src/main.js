@@ -121,7 +121,8 @@ ipcMain.on('create-report-request', (event, request) => {
   try {
     report = generator.generate(request.folderPath, request.projectName, request.tag, store.get('gherkinDialect'));
   } catch (error) {
-    dialog.showErrorBox('Error Generating Report', error.message);
+    const addlInfo = error.featurefile ? `\n\nPlease verify syntax in ${error.featurefile} line ${error.featureline}` : '';
+    dialog.showErrorBox('Error Generating Report', `${error.message}${addlInfo}`);
   }
   event.reply('create-report-reply', report);
 });
