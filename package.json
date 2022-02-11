@@ -11,7 +11,8 @@
     "publish": "npx electron-forge publish",
     "lint": "npx eslint src --color",
     "test": "./node_modules/.bin/cucumber-js features/*.feature --exit",
-    "preversion": "npm run lint && npm test"
+    "preversion": "npm run lint && npm test",
+    "build:docs": "node ./.github/workflows/regenerateDocsReport.js"
   },
   "repository": {
     "type": "git",

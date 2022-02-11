@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
-const Generator = require('../node_modules/cucumber-forge-report-generator/src/Generator');
+const Generator = require('cucumber-forge-report-generator');
 
 const FILE_ENCODING = 'utf-8';
 
