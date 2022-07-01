@@ -1,0 +1,48 @@
+name: CI
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run linters
+        run: npm run lint
+  test:
+    name: Test
+    runs-on: ${{ matrix.os }}
+    needs: lint
+    strategy:
+      matrix:
+        node-version: [16]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - name: Test
+        uses: GabrielBB/xvfb-action@v1.0
+        env:
+          CI: true
+        with:
+          run: npm test
+
