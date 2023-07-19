@@ -46,11 +46,11 @@
     "popper.js": "^1.16.1"
   },
   "devDependencies": {
-    "@electron-forge/cli": "6.0.0-beta.54",
-    "@electron-forge/maker-dmg": "6.0.0-beta.54",
-    "@electron-forge/maker-squirrel": "6.0.0-beta.54",
-    "@electron-forge/maker-zip": "6.0.0-beta.54",
-    "@electron-forge/publisher-github": "6.0.0-beta.54",
+    "@electron-forge/cli": "6.2.1",
+    "@electron-forge/maker-dmg": "6.2.1",
+    "@electron-forge/maker-squirrel": "6.2.1",
+    "@electron-forge/maker-zip": "6.2.1",
+    "@electron-forge/publisher-github": "6.2.1",
     "await-timeout": "^1.1.1",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
@@ -60,6 +60,6 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "node-abi": "^2.19.3",
-    "spectron": "^13.0.0"
+    "spectron": "^19.0.0"
   }
 }
